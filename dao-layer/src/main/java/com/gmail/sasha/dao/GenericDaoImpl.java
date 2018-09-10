@@ -1,4 +1,4 @@
-package com.gmail.sasha.dao.impl;
+package com.gmail.sasha.dao;
 
 import com.gmail.sasha.config.HibernateUtil;
 import com.gmail.sasha.dao.GenericDao;
