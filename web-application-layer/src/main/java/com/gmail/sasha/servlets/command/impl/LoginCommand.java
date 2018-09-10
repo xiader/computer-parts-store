@@ -2,9 +2,9 @@ package com.gmail.sasha.servlets.command.impl;
 
 
 
-import com.gmail.sasha.dao.config.ConfigurationManager;
+import com.gmail.sasha.config.ConfigurationManager;
 
-import com.gmail.sasha.dao.model.User;
+import com.gmail.sasha.model.UserOld;
 import com.gmail.sasha.dao.services.UserService;
 import com.gmail.sasha.dao.services.impl.UserServiceImpl;
 import com.gmail.sasha.servlets.command.Command;
@@ -23,12 +23,12 @@ public class LoginCommand implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (email != null && !email.equals("")) {
-            User userByUsername = userService.findUserByEmail(email);
-            if (userByUsername != null) {
-                if (userByUsername.getPassword().equals(password.trim())) {
+            UserOld userOldByUsername = userService.findUserByEmail(email);
+            if (userOldByUsername != null) {
+                if (userOldByUsername.getPassword().equals(password.trim())) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", UserPrincipalConverter.toUserPrincipal(userByUsername));
-                    switch (userByUsername.getRole()) {
+                    session.setAttribute("user", UserPrincipalConverter.toUserPrincipal(userOldByUsername));
+                    switch (userOldByUsername.getRole()) {
                         case USER:
                             response.sendRedirect("/dispatcher?command=items");
                             break;

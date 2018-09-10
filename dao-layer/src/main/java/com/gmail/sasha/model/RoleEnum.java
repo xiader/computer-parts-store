@@ -1,4 +1,4 @@
-package com.gmail.sasha.dao.model;
+package com.gmail.sasha.model;
 
 public enum RoleEnum {
     USER,

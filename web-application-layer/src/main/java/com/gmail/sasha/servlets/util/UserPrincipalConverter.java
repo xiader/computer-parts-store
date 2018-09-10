@@ -1,17 +1,17 @@
 package com.gmail.sasha.servlets.util;
 
 
-import com.gmail.sasha.dao.model.User;
+import com.gmail.sasha.model.UserOld;
 import com.gmail.sasha.servlets.model.UserPrincipal;
 
 public class UserPrincipalConverter {
 
-    public static UserPrincipal toUserPrincipal(User user) {
+    public static UserPrincipal toUserPrincipal(UserOld userOld) {
         return UserPrincipal.newBuilder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .name(user.getFirstName() + " " + user.getLastName())
-                .role(user.getRole())
+                .id(userOld.getId())
+                .email(userOld.getEmail())
+                .name(userOld.getFirstName() + " " + userOld.getLastName())
+                .role(userOld.getRole())
                 .build();
     }
 }

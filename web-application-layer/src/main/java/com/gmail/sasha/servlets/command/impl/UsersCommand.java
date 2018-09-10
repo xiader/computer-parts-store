@@ -1,8 +1,8 @@
 package com.gmail.sasha.servlets.command.impl;
 
 
-import com.gmail.sasha.dao.config.ConfigurationManager;
-import com.gmail.sasha.dao.model.User;
+import com.gmail.sasha.config.ConfigurationManager;
+import com.gmail.sasha.model.UserOld;
 import com.gmail.sasha.dao.services.UserService;
 import com.gmail.sasha.dao.services.impl.UserServiceImpl;
 import com.gmail.sasha.servlets.command.Command;
@@ -17,8 +17,8 @@ public class UsersCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<User> users = userService.findAll();
-        request.setAttribute("users", users);
+        List<UserOld> userOlds = userService.findAll();
+        request.setAttribute("users", userOlds);
         return ConfigurationManager.getInstance().getProperty(ConfigurationManager.USERS_PAGE_PATH);
 
     }

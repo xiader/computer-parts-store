@@ -1,7 +1,7 @@
 package com.gmail.sasha.servlets.filter;
 
 
-import com.gmail.sasha.dao.model.RoleEnum;
+import com.gmail.sasha.model.RoleEnum;
 import com.gmail.sasha.servlets.model.CommandEnum;
 import com.gmail.sasha.servlets.model.UserPrincipal;
 import org.apache.logging.log4j.LogManager;

@@ -1,7 +1,7 @@
-package com.gmail.sasha.dao.connection;
+package com.gmail.sasha.config.connection;
 
 
-import com.gmail.sasha.dao.config.ConfigurationManager;
+import com.gmail.sasha.config.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

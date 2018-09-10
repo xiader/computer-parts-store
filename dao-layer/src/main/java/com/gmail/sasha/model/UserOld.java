@@ -1,6 +1,6 @@
-package com.gmail.sasha.dao.model;
+package com.gmail.sasha.model;
 
-public class User {
+public class UserOld {
 
     private Long id;
     private String email;

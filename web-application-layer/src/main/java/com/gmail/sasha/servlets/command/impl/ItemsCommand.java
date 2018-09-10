@@ -1,7 +1,7 @@
 package com.gmail.sasha.servlets.command.impl;
 
 
-import com.gmail.sasha.dao.config.ConfigurationManager;
+import com.gmail.sasha.config.ConfigurationManager;
 import com.gmail.sasha.servlets.command.Command;
 
 import javax.servlet.http.HttpServletRequest;

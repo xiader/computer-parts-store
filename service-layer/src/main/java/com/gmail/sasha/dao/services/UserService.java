@@ -1,14 +1,14 @@
 package com.gmail.sasha.dao.services;
 
-import com.gmail.sasha.dao.model.User;
+import com.gmail.sasha.model.UserOld;
 
 import java.util.List;
 
 public interface UserService {
 
-    User save(User user);
+    UserOld save(UserOld userOld);
 
-    User findUserByEmail(String email);
+    UserOld findUserByEmail(String email);
 
-    List<User> findAll();
+    List<UserOld> findAll();
 }

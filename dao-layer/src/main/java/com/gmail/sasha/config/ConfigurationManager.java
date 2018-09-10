@@ -1,4 +1,4 @@
-package com.gmail.sasha.dao.config;
+package com.gmail.sasha.config;
 
 import java.util.ResourceBundle;
 

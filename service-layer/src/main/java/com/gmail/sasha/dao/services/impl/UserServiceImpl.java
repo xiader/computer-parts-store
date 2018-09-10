@@ -1,10 +1,10 @@
 package com.gmail.sasha.dao.services.impl;
 
 
-import com.gmail.sasha.dao.UserDao;
-import com.gmail.sasha.dao.connection.ConnectionService;
-import com.gmail.sasha.dao.impl.UserDaoImpl;
-import com.gmail.sasha.dao.model.User;
+import com.gmail.sasha.dao.UserDaoOld;
+import com.gmail.sasha.config.connection.ConnectionService;
+import com.gmail.sasha.dao.impl.UserDaoOldImpl;
+import com.gmail.sasha.model.UserOld;
 import com.gmail.sasha.dao.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,16 +16,16 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
-    private UserDao userDao = new UserDaoImpl();
+    private UserDaoOld userDaoOld = new UserDaoOldImpl();
 
     @Override
-    public User save(User user) {
+    public UserOld save(UserOld userOld) {
         Connection connection = ConnectionService.getInstance().getConnection();
         try {
             connection.setAutoCommit(false);
-            User savedUser = userDao.save(connection, user);
+            UserOld savedUserOld = userDaoOld.save(connection, userOld);
             connection.commit();
-            return savedUser;
+            return savedUserOld;
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
             try {
@@ -38,13 +38,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
+    public UserOld findUserByEmail(String email) {
         try (Connection connection = ConnectionService.getInstance().getConnection()) {
             try {
                 connection.setAutoCommit(false);
-                User savedUser = userDao.findUserByEmail(connection, email);
+                UserOld savedUserOld = userDaoOld.findUserByEmail(connection, email);
                 connection.commit();
-                return savedUser;
+                return savedUserOld;
             } catch (SQLException e) {
                 logger.error(e.getMessage(), e);
                 try {
@@ -61,13 +61,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<UserOld> findAll() {
         Connection connection = ConnectionService.getInstance().getConnection();
         try {
             connection.setAutoCommit(false);
-            List<User> users = userDao.findAll(connection);
+            List<UserOld> userOlds = userDaoOld.findAll(connection);
             connection.commit();
-            return users;
+            return userOlds;
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
             try {
