@@ -16,7 +16,7 @@ DiscountDao discountDao = new DiscountDaoImpl(Discount.class);
 
         Discount discount = new Discount();
         discount.setExpirationDate(LocalDateTime.now());
-        discount.setInterestRate(new BigDecimal(2));
+        discount.setInterestRate(new BigDecimal(30));
         discount.setName("imya skidki");
         Session session = discountDao.getCurrentSession();
         session.beginTransaction();

@@ -1,8 +1,12 @@
 package com.gmail.sasha.myproject;
 
 
+import com.gmail.sasha.myproject.converter.impl.toEntity.DiscountConverter;
+import com.gmail.sasha.myproject.model.DiscountDTO;
 import com.gmail.sasha.myproject.model.ItemDTO;
+import com.gmail.sasha.myproject.service.DiscountService;
 import com.gmail.sasha.myproject.service.ItemService;
+import com.gmail.sasha.myproject.service.impl.DiscountServiceImpl;
 import com.gmail.sasha.myproject.service.impl.ItemServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +28,68 @@ import static org.junit.Assert.assertTrue;
 public class AppTest {
 
    private static final Logger logger = LogManager.getLogger(AppTest.class);
+
+    @Test
+    public void shouldAnswerWithTrue() {
+        assertTrue(true);
+    }
+
+    @Test
+    public void createItems() {
+        ItemService itemService = new ItemServiceImpl();
+
+        List<ItemDTO> itemDTOList =new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            itemDTOList. add(   generateItems());
+
+        }
+        List<ItemDTO> receivedItems = itemService.save(itemDTOList);
+
+        System.out.println(receivedItems);
+
+
+    }
+
+    @Test
+    public void createDiscount(){
+
+
+        DiscountDTO discountDTO1 =new DiscountDTO();
+        discountDTO1.setExpirationDate(LocalDateTime.now().plusDays(3));
+        discountDTO1.setInterestRate(new BigDecimal(30));
+        discountDTO1.setName("discount 30%");
+        DiscountDTO discountDTO2 =new DiscountDTO();
+        discountDTO2.setExpirationDate(LocalDateTime.now().plusDays(5));
+        discountDTO2.setInterestRate(new BigDecimal(10));
+        discountDTO2.setName("discount 10%");
+        DiscountDTO discountDTO3 =new DiscountDTO();
+        discountDTO3.setExpirationDate(LocalDateTime.now().plusDays(7));
+        discountDTO3.setInterestRate(new BigDecimal(20));
+        discountDTO3.setName("discount 20%");
+
+        List<DiscountDTO> discounts = new ArrayList<>();
+        discounts.add(discountDTO1);
+        discounts.add(discountDTO3);
+        discounts.add(discountDTO2);
+
+        DiscountService discountService =new DiscountServiceImpl();
+        discountService.save(discounts);
+
+
+
+
+    }
+
+    @Test
+    public void assignDiscountsToItems(){
+          /*  for(ItemDTO itemDTO:itemsBetweenTwoHundredAndThreeHundred){
+            itemDTO.setDiscounts(sicountconverter.toEntityList(discounts));
+        }*/
+         /*   List<ItemDTO> itemsBetweenTwoHundredAndThreeHundred = itemService.getItemsInPriceRange(200, 299);
+        System.out.println(itemsBetweenTwoHundredAndThreeHundred);*/
+    }
+
 
 
         private String[] arrayDescription = {"уникальное описание 1",
@@ -57,46 +123,9 @@ public class AppTest {
     /**
      * Rigorous Test :-)
      */
-    @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
-    }
-
-    @Test
-    public void createItems() {
-        ItemService itemService = new ItemServiceImpl();
-
-        List<ItemDTO> itemDTOList =new ArrayList<>();
-
-        for (int i = 0; i < 30; i++) {
-        itemDTOList. add(   generateItems());
-
-        }
-       List<ItemDTO> receivedItems = itemService.save(itemDTOList);
-
-        System.out.println(receivedItems);
 
 
-    }
 
-    @Test
-    public void createDiscount(){
-
-      /*  List<ItemDTO> itemsBetweenTwoHundredAndThreeHundred = itemService.getItemsInPriceRange(200, 299);
-        System.out.println(itemsBetweenTwoHundredAndThreeHundred);
-        DiscountDTO discountDTO =new DiscountDTO();
-        discountDTO.setExpirationDate(LocalDateTime.now().plusDays(3));
-        discountDTO.setInterestRate(new BigDecimal(30));
-        discountDTO.setName("some what discount");
-        DiscountService discountService =new DiscountServiceImpl();
-        Set<DiscountDTO> discounts = new HashSet<>();
-        DiscountConverter sicountconverter = new DiscountConverter();
-
-        discounts.add(discountDTO);
-        for(ItemDTO itemDTO:itemsBetweenTwoHundredAndThreeHundred){
-            itemDTO.setDiscounts(sicountconverter.toEntityList(discounts));
-        }*/
-    }
 
     private ItemDTO generateItems() {
 
