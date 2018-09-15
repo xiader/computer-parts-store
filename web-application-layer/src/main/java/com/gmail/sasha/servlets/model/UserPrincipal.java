@@ -1,6 +1,6 @@
 package com.gmail.sasha.servlets.model;
 
-import com.gmail.sasha.model.RoleEnum;
+import com.gmail.sasha.myproject.model.RoleEnum;
 
 import java.io.Serializable;
 

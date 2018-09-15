@@ -4,7 +4,7 @@
         <Root level="DEBUG" additivity="false">
             <AppenderRef level="DEBUG" ref="CONSOLE"/>
         </Root>
-        <Logger name="com.gmail.sasha.dao" level="INFO"
+        <Logger name="com.gmail.sasha.myproject.dao" level="INFO"
                 additivity="false">
             <Appender-ref ref="fileAppender" level="DEBUG"/>
             <Appender-ref ref="CONSOLE" level="INFO"/>

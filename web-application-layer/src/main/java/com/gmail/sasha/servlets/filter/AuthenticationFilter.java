@@ -1,7 +1,7 @@
 package com.gmail.sasha.servlets.filter;
 
 
-import com.gmail.sasha.model.RoleEnum;
+import com.gmail.sasha.myproject.model.RoleEnum;
 import com.gmail.sasha.servlets.model.CommandEnum;
 import com.gmail.sasha.servlets.model.UserPrincipal;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +23,7 @@ public class AuthenticationFilter implements Filter {
     private static final String LOGIN_PATH = "/index.html";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         logger.info("AuthenticationFilter initialized");
         USER_AVAILABLE.add(CommandEnum.ITEMS);
 

@@ -13,7 +13,7 @@ public class LogFilter implements Filter {
     private static final Logger logger = LogManager.getLogger(LogFilter.class);
 
     @Override
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig fConfig)  {
         logger.info("LogFilter init!");
     }
 
