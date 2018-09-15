@@ -1,6 +1,5 @@
 package com.gmail.sasha.dao.services.model;
 
-import com.gmail.sasha.model.Order;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,13 +17,13 @@ public class ItemDTO implements Serializable {
 
     private BigDecimal price;
 
-    private List<Order> orderDTOS = new ArrayList<>();
+    private List<OrderDTO> orderDTOS = new ArrayList<>();
 
 
     public ItemDTO() {
     }
 
-    public ItemDTO(Long id, String name, String description, String uniqueNumber, BigDecimal price, List<Order> orderDTOS) {
+    public ItemDTO(Long id, String name, String description, String uniqueNumber, BigDecimal price, List<OrderDTO> orderDTOS) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -74,11 +73,11 @@ public class ItemDTO implements Serializable {
         this.price = price;
     }
 
-    public List<Order> getOrderDTOS() {
+    public List<OrderDTO> getOrderDTOS() {
         return orderDTOS;
     }
 
-    public void setOrderDTOS(List<Order> orderDTOS) {
+    public void setOrderDTOS(List<OrderDTO> orderDTOS) {
         this.orderDTOS = orderDTOS;
     }
 

@@ -3,16 +3,17 @@ package com.gmail.sasha.dao.services.model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RoleDTO {
-
+public class PermissionDTO {
 
     private Long id;
 
+
     private String name;
 
-    private Set<PermissionDTO> permissions = new HashSet<>();
 
-    public RoleDTO() {
+    private Set<RoleDTO> roles = new HashSet<>();
+
+    public PermissionDTO() {
     }
 
     public Long getId() {
@@ -31,11 +32,11 @@ public class RoleDTO {
         this.name = name;
     }
 
-    public Set<PermissionDTO> getPermissions() {
-        return permissions;
+    public Set<RoleDTO> getRoles() {
+        return roles;
     }
 
-    public void setPermissions(Set<PermissionDTO> permissions) {
-        this.permissions = permissions;
+    public void setRoles(Set<RoleDTO> roles) {
+        this.roles = roles;
     }
 }
