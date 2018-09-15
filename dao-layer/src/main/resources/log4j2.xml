@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Loggers>
+        <Root level="DEBUG" additivity="false">
+            <AppenderRef level="DEBUG" ref="CONSOLE"/>
+        </Root>
+        <Logger name="com.gmail.sasha.dao" level="INFO"
+                additivity="false">
+            <Appender-ref ref="fileAppender" level="DEBUG"/>
+            <Appender-ref ref="CONSOLE" level="INFO"/>
+        </Logger>
+        <Logger name="org.hibernate" level="ERROR"
+                additivity="false">
+        </Logger>
+    </Loggers>
+
+    <Appenders>
+
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %c{1}: %L - %msg%n%throwable}"/>
+        </Console>
+        <!--move all dao logs in archive every 5 days
+        this appender is used only for dao layer
+        -->
+        <RollingFile name="fileAppender" fileName="log/log.log"
+                     filePattern="log/log.%d{MM-dd-yyyy-HH-mm}.%i.log.gz">
+            ignoreExceptions="false">
+            <PatternLayout
+                    pattern="%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %c{1}: %L - %msg%n}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+                <OnStartupTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20">
+                <Delete basePath="${baseDir}" maxDepth="2">
+                    <IfFileName glob="log/log.*.log.gz"/>
+                    <IfLastModified age="5d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+</Configuration>

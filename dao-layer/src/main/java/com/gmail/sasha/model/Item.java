@@ -3,9 +3,7 @@ package com.gmail.sasha.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "t_item")
@@ -23,13 +21,14 @@ public class Item implements Serializable {
     private String description;
 
     @Column(name = "unique_number", columnDefinition = "VARCHAR(50)")
-    private UUID uniqueNumber;
+    private String uniqueNumber;
 
     @Column(name = "price", precision = 18, scale = 3)
     private BigDecimal price;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> users = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
+
 
     public Item() {
     }
@@ -58,11 +57,11 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public UUID getUniqueNumber() {
+    public String getUniqueNumber() {
         return uniqueNumber;
     }
 
-    public void setUniqueNumber(UUID uniqueNumber) {
+    public void setUniqueNumber(String uniqueNumber) {
         this.uniqueNumber = uniqueNumber;
     }
 
@@ -74,12 +73,12 @@ public class Item implements Serializable {
         this.price = price;
     }
 
-    public List<Order> getUsers() {
-        return users;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setUsers(List<Order> users) {
-        this.users = users;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
@@ -117,7 +116,6 @@ public class Item implements Serializable {
                 ", description='" + description + '\'' +
                 ", uniqueNumber=" + uniqueNumber +
                 ", price=" + price +
-                ", users=" + users +
                 '}';
     }
 }

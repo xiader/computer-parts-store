@@ -1,4 +1,5 @@
-package com.gmail.sasha.dao.services.impl;
+/*
+package com.gmail.sasha.dao.services.service.impl;
 
 
 import com.gmail.sasha.dao.UserDaoOld;
@@ -79,3 +80,4 @@ public class UserServiceImpl implements UserService {
         return new ArrayList<>();
     }
 }
+*/

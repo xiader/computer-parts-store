@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,18 +35,22 @@ public class OrderTest {
 
     @Test
     public void testSaveOrder() {
-        //   UserTest ut = new UserTest();
-        //  ut.saveUserWithAssignedRole();
+        //  UserTest ut = new UserTest();
+        // ut.saveUserWithAssignedRole();
 
         Order order = new Order();
         order.setCreated(LocalDateTime.now());
         order.setQuantity(12);
         Transaction tx = null;
-        try (Session session = orderDao.getCurrentSession()) {
+        try {
+            Session session = orderDao.getCurrentSession();
+
             tx = session.beginTransaction();
             User user = userDao.findById(1L);
+            Assert.assertNotNull(user);
             Item item = itemDao.findById(1L);
-            order.setId(new UserItemId(item.getId(), user.getId()));
+            Assert.assertNotNull(item);
+           // order.setId(new UserItemId(item.getId(), user.getId()));
             order.setItem(item);
             order.setUser(user);
 

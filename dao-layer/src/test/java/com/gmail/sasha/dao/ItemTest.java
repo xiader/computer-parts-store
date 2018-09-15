@@ -36,7 +36,7 @@ public class ItemTest {
         item.setDescription("descriptionOfItem");
         item.setName("baton");
         item.setPrice(new BigDecimal(1125.25));
-        item.setUniqueNumber(UUID.randomUUID());
+        item.setUniqueNumber(UUID.randomUUID().toString());
         Transaction tx = null;
         try (Session session =  itemDao.getCurrentSession()) {
             tx = session.beginTransaction();

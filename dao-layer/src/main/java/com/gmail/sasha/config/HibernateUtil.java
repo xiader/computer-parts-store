@@ -50,8 +50,7 @@ public class HibernateUtil {
 
                 logger.info("Hibernate registry builder created");
                 MetadataSources metadataSource = new MetadataSources(standardServiceRegistry);
-               // metadataSource.addAnnotatedClass(User.class);
-               metadataSource.addAnnotatedClass(Comment.class);
+                metadataSource.addAnnotatedClass(Comment.class);
                 metadataSource.addAnnotatedClass(Item.class);
                 metadataSource.addAnnotatedClass(Order.class);
                 metadataSource.addAnnotatedClass(Permission.class);
@@ -72,6 +71,7 @@ public class HibernateUtil {
                 if (sessionFactory != null) {
                     StandardServiceRegistryBuilder.destroy(standardServiceRegistry);
                 }
+                throw new RuntimeException(e);
             }
         }
         return sessionFactory;

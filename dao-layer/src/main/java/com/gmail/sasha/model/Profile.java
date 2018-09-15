@@ -25,10 +25,6 @@ public class Profile implements Serializable {
     @Column(name = "telephone", columnDefinition = "VARCHAR(20)")
     private String telephone;
 
-    /*
-    When optional is set to false, hibernate will automatically
-    create the foreign key constraint on the reference table by primary key.
-    * */
     @PrimaryKeyJoinColumn(name = "profile_id", foreignKey = @ForeignKey(name="f_profile_id_user"))
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     private User user;
