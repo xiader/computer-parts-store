@@ -5,14 +5,14 @@ import com.gmail.sasha.myproject.model.*;
 
 public class UserConverter implements EntityConverter<UserDTO, User> {
 
-    private EntityConverter<OrderDTO, Order> itemConverter = new OrderConverter();
-    private EntityConverter<RoleDTO, Role> roleEntityConverter = new RoleConverter();
 
     @Override
     public User toEntity(UserDTO dto) {
         if (dto == null) {
             return null;
         }
+        EntityConverter<RoleDTO, Role> roleEntityConverter = new RoleConverter();
+        EntityConverter<OrderDTO, Order> itemConverter = new OrderConverter();
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setId(dto.getId());

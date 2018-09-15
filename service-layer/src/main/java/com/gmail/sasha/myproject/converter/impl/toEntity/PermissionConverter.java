@@ -7,13 +7,13 @@ import com.gmail.sasha.myproject.model.Role;
 import com.gmail.sasha.myproject.model.RoleDTO;
 
 public class PermissionConverter implements EntityConverter<PermissionDTO, Permission> {
-    private EntityConverter<RoleDTO, Role> permissionEntityConverter = new RoleConverter();
 
     @Override
     public Permission toEntity(PermissionDTO dto) {
         if (dto == null) {
             return null;
         }
+        EntityConverter<RoleDTO, Role> permissionEntityConverter = new RoleConverter();
         Permission permission = new Permission();
         permission.setId(dto.getId());
         permission.setName(dto.getName());

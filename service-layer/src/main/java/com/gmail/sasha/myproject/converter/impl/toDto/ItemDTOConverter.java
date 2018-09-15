@@ -8,10 +8,13 @@ import com.gmail.sasha.myproject.model.OrderDTO;
 
 public class ItemDTOConverter implements DTOConverter<ItemDTO, Item> {
 
-    private DTOConverter<OrderDTO, Order> orderDTOConverter = new OrderDTOConverter();
 
     @Override
     public ItemDTO toDTO(Item entity) {
+        if(entity == null){
+            return null;
+        }
+        DTOConverter<OrderDTO, Order> orderDTOConverter = new OrderDTOConverter();
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setDescription(entity.getDescription());
         itemDTO.setId(entity.getId());

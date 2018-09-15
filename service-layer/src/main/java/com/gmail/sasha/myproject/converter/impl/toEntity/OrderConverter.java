@@ -14,16 +14,14 @@ import com.gmail.sasha.myproject.model.UserItemIdDTO;
 
 public class OrderConverter implements EntityConverter<OrderDTO, Order> {
 
-    private EntityConverter<UserItemIdDTO, UserItemId> userItemIdConverter = new UserItemIdConverter();
-    private EntityConverter<ItemDTO, Item> itemEntityConverter = new ItemConverter();
-    private EntityConverter<UserDTO, User> userEntityConverter = new UserConverter();
-    private EntityConverter<OrderDTO, Order> orderEntityConverter = new OrderConverter();
-
     @Override
     public Order toEntity(OrderDTO dto) {
         if(dto == null){
             return null;
         }
+        EntityConverter<ItemDTO, Item> itemEntityConverter = new ItemConverter();
+        EntityConverter<UserDTO, User> userEntityConverter = new UserConverter();
+        EntityConverter<UserItemIdDTO, UserItemId> userItemIdConverter = new UserItemIdConverter();
         Order order = new Order();
         order.setCreated(dto.getCreated());
         order.setId(userItemIdConverter.toEntity(dto.getId()));

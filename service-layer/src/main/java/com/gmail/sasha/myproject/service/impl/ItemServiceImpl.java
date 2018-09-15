@@ -1,5 +1,7 @@
 package com.gmail.sasha.myproject.service.impl;
 
+import com.gmail.sasha.myproject.converter.DTOConverter;
+import com.gmail.sasha.myproject.converter.EntityConverter;
 import com.gmail.sasha.myproject.dao.ItemDao;
 import com.gmail.sasha.myproject.dao.impl.ItemDaoImpl;
 import com.gmail.sasha.myproject.model.Item;
@@ -15,8 +17,8 @@ import java.util.List;
 
 public class ItemServiceImpl implements ItemService {
     private ItemDao itemDao = new ItemDaoImpl(Item.class);
-    private ItemConverter itemConverter = new ItemConverter();
-    private ItemDTOConverter itemDTOConverter = new ItemDTOConverter();
+    private EntityConverter<ItemDTO, Item> itemConverter = new ItemConverter();
+    private DTOConverter<ItemDTO, Item> itemDTOConverter = new ItemDTOConverter();
 
 
     @Override
