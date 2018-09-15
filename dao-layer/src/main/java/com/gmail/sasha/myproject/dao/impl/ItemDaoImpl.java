@@ -32,5 +32,12 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
                 .uniqueResult();
     }
 
+    @Override
+    public List<Item> findAllOrderByDiscount() {
+        return  getCurrentSession()
+                .createQuery("select i from Item as i join i.discounts as disc order by disc.interestRate")
+                .list();
+    }
+
 
 }

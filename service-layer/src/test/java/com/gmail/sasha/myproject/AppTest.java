@@ -3,6 +3,7 @@ package com.gmail.sasha.myproject;
 
 import com.gmail.sasha.myproject.model.DiscountDTO;
 import com.gmail.sasha.myproject.model.ItemDTO;
+import com.gmail.sasha.myproject.model.ItemWithDiscountedPrice;
 import com.gmail.sasha.myproject.service.DiscountService;
 import com.gmail.sasha.myproject.service.ItemDiscountService;
 import com.gmail.sasha.myproject.service.ItemService;
@@ -109,15 +110,18 @@ public class AppTest {
     @Test
     public void assignDiscountsToItems() {
         ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
-        itemDiscountService.assignToRangeOfItemsСorrespondingDiscounts(200, 299, new BigDecimal(10));
-        itemDiscountService.assignToRangeOfItemsСorrespondingDiscounts(300, 399, new BigDecimal(20));
-        itemDiscountService.assignToRangeOfItemsСorrespondingDiscounts(400, 500, new BigDecimal(30));
+        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(200, 299, new BigDecimal(10));
+        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(300, 399, new BigDecimal(20));
+        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(400, 500, new BigDecimal(30));
 
     }
     @Test
     public void showListItemWithDiscount(){
         ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
-        itemDiscountService.showItemsWithDiscountedPrice();
+
+        for (ItemWithDiscountedPrice element : itemDiscountService.showItemsWithDiscountedPrice()) {
+            System.out.println(element);
+        }
     }
 
     /**

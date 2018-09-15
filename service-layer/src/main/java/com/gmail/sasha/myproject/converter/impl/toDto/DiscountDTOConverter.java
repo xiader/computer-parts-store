@@ -8,19 +8,17 @@ import com.gmail.sasha.myproject.model.DiscountDTO;
 import com.gmail.sasha.myproject.model.Item;
 import com.gmail.sasha.myproject.model.ItemDTO;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DiscountDTOConverter implements DTOConverter<DiscountDTO, Discount> {
     @Override
     public DiscountDTO toDTO(Discount entity) {
-        DTOConverter<ItemDTO, Item> itemDTOConverter = new ItemDTOConverter();
+       // DTOConverter<ItemDTO, Item> itemDTOConverter = new ItemDTOConverter();
         DiscountDTO discountDTO = new DiscountDTO();
         discountDTO.setName(entity.getName());
         discountDTO.setInterestRate(entity.getInterestRate());
         discountDTO.setExpirationDate(entity.getExpirationDate());
         discountDTO.setName(entity.getName());
-        discountDTO.setItems(itemDTOConverter.toDTOSet(entity.getItems()));
+     //   discountDTO.setItems(itemDTOConverter.toDTOSet(entity.getItems()));
         return discountDTO;
     }
 
