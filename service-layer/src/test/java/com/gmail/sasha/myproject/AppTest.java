@@ -4,12 +4,15 @@ package com.gmail.sasha.myproject;
 import com.gmail.sasha.myproject.model.DiscountDTO;
 import com.gmail.sasha.myproject.model.ItemDTO;
 import com.gmail.sasha.myproject.model.ItemWithDiscountedPrice;
+import com.gmail.sasha.myproject.model.UserDTO;
 import com.gmail.sasha.myproject.service.DiscountService;
 import com.gmail.sasha.myproject.service.ItemDiscountService;
 import com.gmail.sasha.myproject.service.ItemService;
+import com.gmail.sasha.myproject.service.UserService;
 import com.gmail.sasha.myproject.service.impl.DiscountServiceImpl;
 import com.gmail.sasha.myproject.service.impl.ItemDiscountServiceImpl;
 import com.gmail.sasha.myproject.service.impl.ItemServiceImpl;
+import com.gmail.sasha.myproject.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -123,6 +126,18 @@ public class AppTest {
             System.out.println(element);
         }
     }
+
+    @Test
+    public void createUser(){
+        UserService userService =new UserServiceImpl();
+        UserDTO user = new UserDTO();
+        user.setEmail("some_email@tut.by");
+        user.setSurname("some_surname");
+        user.setName("some_name");
+        user.setPassword("1234password");
+        userService.save(user);
+    }
+
 
     /**
      * Rigorous Test :-)
