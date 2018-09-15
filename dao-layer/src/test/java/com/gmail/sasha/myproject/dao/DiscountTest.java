@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class DiscountTest {
 
@@ -22,4 +23,18 @@ DiscountDao discountDao = new DiscountDaoImpl(Discount.class);
         session.beginTransaction();
         discountDao.create(discount);
         session.getTransaction().commit();
-}}
+}
+
+@Test
+    public void testDiscountByInterestRate(){
+    DiscountDao discountDao = new DiscountDaoImpl(Discount.class);
+
+
+    Session session = discountDao.getCurrentSession();
+    session.beginTransaction();
+    List<Discount> d = discountDao.findDiscountByinterestRate(new BigDecimal(30));
+    System.out.println(d);
+    session.getTransaction().commit();
+}
+
+}

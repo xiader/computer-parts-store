@@ -25,4 +25,12 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
         return getCurrentSession().createQuery("select i from Item as i where i.price between "+from+" and "+to)
                 .list();
     }
+
+    @Override
+    public Item getById(int i) {
+        return (Item) getCurrentSession().createQuery("select i from Item as i where i.id =" + i)
+                .uniqueResult();
+    }
+
+
 }

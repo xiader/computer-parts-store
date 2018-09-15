@@ -19,6 +19,8 @@ public class ItemDTO implements Serializable {
 
     private List<OrderDTO> orderDTOS = new ArrayList<>();
 
+    private Set<DiscountDTO> discounts = new HashSet<>();
+
 
     public ItemDTO() {
     }
@@ -81,6 +83,13 @@ public class ItemDTO implements Serializable {
         this.orderDTOS = orderDTOS;
     }
 
+    public Set<DiscountDTO> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(Set<DiscountDTO> discounts) {
+        this.discounts = discounts;
+    }
 
     @Override
     public String toString() {

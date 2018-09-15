@@ -15,7 +15,7 @@ public class DiscountDTO {
     private LocalDateTime expirationDate;
 
 
-    private Set<Item> items = new HashSet<>();
+    private Set<ItemDTO> items = new HashSet<>();
 
     public DiscountDTO() {
     }
@@ -52,11 +52,21 @@ public class DiscountDTO {
         this.expirationDate = expirationDate;
     }
 
-    public Set<Item> getItems() {
+    public Set<ItemDTO> getItems() {
         return items;
     }
 
-    public void setItems(Set<Item> items) {
+    public void setItems(Set<ItemDTO> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "DiscountDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", interestRate=" + interestRate +
+                ", expirationDate=" + expirationDate +
+                '}';
     }
 }

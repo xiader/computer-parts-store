@@ -30,8 +30,7 @@ public class Item implements Serializable {
     private List<Order> orders = new ArrayList<>();
 
     @ManyToMany(mappedBy = "items", cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.ALL
     })
     private Set<Discount> discounts = new HashSet<>();
 

@@ -1,12 +1,13 @@
 package com.gmail.sasha.myproject;
 
 
-import com.gmail.sasha.myproject.converter.impl.toEntity.DiscountConverter;
 import com.gmail.sasha.myproject.model.DiscountDTO;
 import com.gmail.sasha.myproject.model.ItemDTO;
 import com.gmail.sasha.myproject.service.DiscountService;
+import com.gmail.sasha.myproject.service.ItemDiscountService;
 import com.gmail.sasha.myproject.service.ItemService;
 import com.gmail.sasha.myproject.service.impl.DiscountServiceImpl;
+import com.gmail.sasha.myproject.service.impl.ItemDiscountServiceImpl;
 import com.gmail.sasha.myproject.service.impl.ItemServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,85 +28,20 @@ import static org.junit.Assert.assertTrue;
  */
 public class AppTest {
 
-   private static final Logger logger = LogManager.getLogger(AppTest.class);
+    private static final Logger logger = LogManager.getLogger(AppTest.class);
+    private String[] arrayDescription = {"уникальное описание 1",
+            "описание 2",
+            "описание 3",
+            "описание 4",
+            "описание 5",
+            "описание 6",
+            "описание 7",
+            "описание 8",
+            "описание 9",
+            "описание 10",
 
-    @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
-    }
-
-    @Test
-    public void createItems() {
-        ItemService itemService = new ItemServiceImpl();
-
-        List<ItemDTO> itemDTOList =new ArrayList<>();
-
-        for (int i = 0; i < 30; i++) {
-            itemDTOList. add(   generateItems());
-
-        }
-        List<ItemDTO> receivedItems = itemService.save(itemDTOList);
-
-        System.out.println(receivedItems);
-
-
-    }
-
-    @Test
-    public void createDiscount(){
-
-
-        DiscountDTO discountDTO1 =new DiscountDTO();
-        discountDTO1.setExpirationDate(LocalDateTime.now().plusDays(3));
-        discountDTO1.setInterestRate(new BigDecimal(30));
-        discountDTO1.setName("discount 30%");
-        DiscountDTO discountDTO2 =new DiscountDTO();
-        discountDTO2.setExpirationDate(LocalDateTime.now().plusDays(5));
-        discountDTO2.setInterestRate(new BigDecimal(10));
-        discountDTO2.setName("discount 10%");
-        DiscountDTO discountDTO3 =new DiscountDTO();
-        discountDTO3.setExpirationDate(LocalDateTime.now().plusDays(7));
-        discountDTO3.setInterestRate(new BigDecimal(20));
-        discountDTO3.setName("discount 20%");
-
-        List<DiscountDTO> discounts = new ArrayList<>();
-        discounts.add(discountDTO1);
-        discounts.add(discountDTO3);
-        discounts.add(discountDTO2);
-
-        DiscountService discountService =new DiscountServiceImpl();
-        discountService.save(discounts);
-
-
-
-
-    }
-
-    @Test
-    public void assignDiscountsToItems(){
-          /*  for(ItemDTO itemDTO:itemsBetweenTwoHundredAndThreeHundred){
-            itemDTO.setDiscounts(sicountconverter.toEntityList(discounts));
-        }*/
-         /*   List<ItemDTO> itemsBetweenTwoHundredAndThreeHundred = itemService.getItemsInPriceRange(200, 299);
-        System.out.println(itemsBetweenTwoHundredAndThreeHundred);*/
-    }
-
-
-
-        private String[] arrayDescription = {"уникальное описание 1",
-                "описание 2",
-                "описание 3",
-                "описание 4",
-                "описание 5",
-                "описание 6",
-                "описание 7",
-                "описание 8",
-                "описание 9",
-                "описание 10",
-
-        };
-        private List<String> list = new ArrayList<>(Arrays.asList(arrayDescription));
-
+    };
+    private List<String> list = new ArrayList<>(Arrays.asList(arrayDescription));
 
     private static String getRandomValue(Set<String> someSet) {
         int rd = new Random().nextInt(someSet.size());
@@ -120,11 +56,73 @@ public class AppTest {
 
     }
 
+    @Test
+    public void shouldAnswerWithTrue() {
+        assertTrue(true);
+    }
+
+    @Test
+    public void createItems() {
+        ItemService itemService = new ItemServiceImpl();
+
+        List<ItemDTO> itemDTOList = new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            itemDTOList.add(generateItems());
+
+        }
+        List<ItemDTO> receivedItems = itemService.save(itemDTOList);
+
+        System.out.println(receivedItems);
+
+
+    }
+
+    @Test
+    public void createDiscount() {
+
+
+        DiscountDTO discountDTO1 = new DiscountDTO();
+        discountDTO1.setExpirationDate(LocalDateTime.now().plusDays(3));
+        discountDTO1.setInterestRate(new BigDecimal(30));
+        discountDTO1.setName("discount 30%");
+        DiscountDTO discountDTO2 = new DiscountDTO();
+        discountDTO2.setExpirationDate(LocalDateTime.now().plusDays(5));
+        discountDTO2.setInterestRate(new BigDecimal(10));
+        discountDTO2.setName("discount 10%");
+        DiscountDTO discountDTO3 = new DiscountDTO();
+        discountDTO3.setExpirationDate(LocalDateTime.now().plusDays(7));
+        discountDTO3.setInterestRate(new BigDecimal(20));
+        discountDTO3.setName("discount 20%");
+
+        List<DiscountDTO> discounts = new ArrayList<>();
+        discounts.add(discountDTO1);
+        discounts.add(discountDTO3);
+        discounts.add(discountDTO2);
+
+        DiscountService discountService = new DiscountServiceImpl();
+        discountService.save(discounts);
+
+
+    }
+
+    @Test
+    public void assignDiscountsToItems() {
+        ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
+        itemDiscountService.assignToRangeOfItemsСorrespondingDiscounts(200, 299, new BigDecimal(10));
+        itemDiscountService.assignToRangeOfItemsСorrespondingDiscounts(300, 399, new BigDecimal(20));
+        itemDiscountService.assignToRangeOfItemsСorrespondingDiscounts(400, 500, new BigDecimal(30));
+
+    }
+    @Test
+    public void showListItemWithDiscount(){
+        ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
+        itemDiscountService.showItemsWithDiscountedPrice();
+    }
+
     /**
      * Rigorous Test :-)
      */
-
-
 
 
     private ItemDTO generateItems() {
@@ -136,11 +134,11 @@ public class AppTest {
         itemDTO.setPrice(getRandomPrice());
         return itemDTO;
 
-      /*  */
+        /*  */
     }
 
     @Test
-    public void getItems(){
+    public void getItems() {
         ItemService itemService = new ItemServiceImpl();
         itemService.getAllItems();
     }
@@ -171,7 +169,7 @@ public class AppTest {
     }
 
     private BigDecimal getRandomPrice() {
-       String range = String.valueOf(new Random().nextInt(300-100) + 100);
+        String range = String.valueOf(new Random().nextInt(500 - 100) + 100);
         return new BigDecimal(range + ".0");
 
     }

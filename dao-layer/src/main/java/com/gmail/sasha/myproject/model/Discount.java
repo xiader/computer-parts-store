@@ -21,7 +21,7 @@ public class Discount implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "interest_rate", precision = 3, scale = 2)
+    @Column(name = "interest_rate", precision = 10, scale = 2)
     private BigDecimal interestRate;
 
     @Column(name = "date_expiration")

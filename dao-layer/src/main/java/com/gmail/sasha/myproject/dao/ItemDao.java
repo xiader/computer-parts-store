@@ -9,4 +9,6 @@ public interface ItemDao extends GenericDao<Item>{
     Item findById(long itemId);
 
     List<Item> findItemsInPriceRange(int from, int to);
+
+    Item getById(int i);
 }

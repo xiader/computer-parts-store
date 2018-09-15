@@ -1,7 +1,9 @@
 package com.gmail.sasha.myproject.dao;
 
+import com.gmail.sasha.myproject.dao.impl.DiscountDaoImpl;
 import com.gmail.sasha.myproject.dao.impl.ItemDaoImpl;
 import com.gmail.sasha.myproject.dao.impl.OrderDaoImpl;
+import com.gmail.sasha.myproject.model.Discount;
 import com.gmail.sasha.myproject.model.Item;
 import com.gmail.sasha.myproject.model.Order;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class ItemTest {
@@ -46,6 +51,23 @@ public class ItemTest {
             }
             logger.error(e.getMessage(), e);
         }
+
+    }
+
+    @Test
+    public void updateItemById(){
+        DiscountDao ddao = new DiscountDaoImpl(Discount.class);
+        Session session =  itemDao.getCurrentSession() ;
+            Transaction tx  = session.beginTransaction();
+           Item itemfrombase = itemDao.getById(90);
+        System.out.println(itemfrombase );
+        List<Discount> discount = ddao.findDiscountByinterestRate(new BigDecimal(30));
+
+        itemfrombase.setDiscounts(new HashSet<>(discount));
+        Set<Item> items = new HashSet<>();
+        items.add(itemfrombase);
+        discount.get(0).setItems(items);
+        tx.commit();
 
     }
 }

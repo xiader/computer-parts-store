@@ -13,4 +13,6 @@ public interface ItemService {
     List<ItemDTO> getItemsInPriceRange(int from, int to);
 
     ItemDTO findById(ItemDTO itemDTO);
+
+    void update(List<ItemDTO> itemsDTO);
 }

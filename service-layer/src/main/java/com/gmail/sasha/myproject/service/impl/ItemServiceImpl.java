@@ -96,6 +96,32 @@ public class ItemServiceImpl implements ItemService {
         }
       return null;
     }
+
+    @Override
+    public void update(List<ItemDTO> itemsDTO) {
+        Session session = itemDao.getCurrentSession();
+        try {
+            Transaction tx = session.getTransaction();
+            if (!tx.isActive()) {
+                session.beginTransaction();
+            }
+          //  List<Item> savedItems = new ArrayList<>();
+            for (ItemDTO itemDTO : itemsDTO) {
+                Item item = itemConverter.toEntity(itemDTO);
+                itemDao.update(item);
+           //     savedItems.add(item);
+            }
+           // List<ItemDTO> listItemDTo = itemDTOConverter.toDTOList(savedItems);
+            tx.commit();
+
+
+        } catch (Exception e) {
+            if (session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
+        }
+    }
+
 }
 
 
