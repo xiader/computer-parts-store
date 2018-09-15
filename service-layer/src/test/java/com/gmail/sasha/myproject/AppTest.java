@@ -5,14 +5,8 @@ import com.gmail.sasha.myproject.model.DiscountDTO;
 import com.gmail.sasha.myproject.model.ItemDTO;
 import com.gmail.sasha.myproject.model.ItemWithDiscountedPrice;
 import com.gmail.sasha.myproject.model.UserDTO;
-import com.gmail.sasha.myproject.service.DiscountService;
-import com.gmail.sasha.myproject.service.ItemDiscountService;
-import com.gmail.sasha.myproject.service.ItemService;
-import com.gmail.sasha.myproject.service.UserService;
-import com.gmail.sasha.myproject.service.impl.DiscountServiceImpl;
-import com.gmail.sasha.myproject.service.impl.ItemDiscountServiceImpl;
-import com.gmail.sasha.myproject.service.impl.ItemServiceImpl;
-import com.gmail.sasha.myproject.service.impl.UserServiceImpl;
+import com.gmail.sasha.myproject.service.*;
+import com.gmail.sasha.myproject.service.impl.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -118,8 +112,9 @@ public class AppTest {
         itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(400, 500, new BigDecimal(30));
 
     }
+
     @Test
-    public void showListItemWithDiscount(){
+    public void showListItemWithDiscount() {
         ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
         System.out.println("===========");
         for (ItemWithDiscountedPrice element : itemDiscountService.showItemsWithDiscountedPrice()) {
@@ -129,8 +124,8 @@ public class AppTest {
     }
 
     @Test
-    public void createUser(){
-        UserService userService =new UserServiceImpl();
+    public void createUser() {
+        UserService userService = new UserServiceImpl();
         UserDTO user = new UserDTO();
         user.setEmail("some_email@tut.by");
         user.setSurname("some_surname");
@@ -140,9 +135,14 @@ public class AppTest {
     }
 
     @Test
-    public void assignToUserItsDiscount(){
-UserService us = new UserServiceImpl();
-us.assignDiscountToUser();
+    public void assignToUserItsDiscount() {
+        UserService us = new UserServiceImpl();
+        us.assignDiscountToUser();
+    }
+    @Test
+    public void createFourOrders(){
+        OrderService orderService = new OrderServiceImpl();
+        orderService.createFourOrders();
     }
 
     /**
@@ -171,7 +171,7 @@ us.assignDiscountToUser();
     private Set<String> generateRandomName() {
 
         Set<String> names = new HashSet<>();
-        try (Stream<String> stream = Files.lines(Paths.get("D://items"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("items"))) {
             stream.forEach(names::add);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);

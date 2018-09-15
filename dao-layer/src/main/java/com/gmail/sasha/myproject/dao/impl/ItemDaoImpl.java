@@ -39,5 +39,12 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
                 .list();
     }
 
+    @Override
+    public Long findCountItemsInSpecificRange(int from, int to) {
+        return (Long) getCurrentSession().createQuery("select count (f.id) from Item f where f.price between "+from+" and "+to)
+                .uniqueResult();
+
+    }
+
 
 }

@@ -6,6 +6,7 @@ import com.gmail.sasha.myproject.dao.impl.UserDaoImpl;
 import com.gmail.sasha.myproject.model.Item;
 import com.gmail.sasha.myproject.model.Order;
 import com.gmail.sasha.myproject.model.User;
+import com.gmail.sasha.myproject.model.UserItemId;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -49,7 +50,7 @@ public class OrderTest {
             Assert.assertNotNull(user);
             Item item = itemDao.findById(1L);
             Assert.assertNotNull(item);
-           // order.setId(new UserItemId(item.getId(), user.getId()));
+            order.setId(new UserItemId(item.getId(), user.getId()));
             order.setItem(item);
             order.setUser(user);
 
