@@ -8,7 +8,7 @@ import com.gmail.sasha.myproject.model.Discount;
 import java.math.BigDecimal;
 import java.util.List;
 
-
+@SuppressWarnings({"unchecked", "JpaQlInspection"})
 public class DiscountDaoImpl extends GenericDaoImpl<Discount> implements DiscountDao {
     public DiscountDaoImpl(Class<Discount> clazz) {
         super(clazz);
@@ -19,5 +19,13 @@ public class DiscountDaoImpl extends GenericDaoImpl<Discount> implements Discoun
         return  getCurrentSession().createQuery("select d from Discount as d where d.interestRate =:interestrate")
                 .setParameter("interestrate", interestRate)
                 .list();
+    }
+
+    @Override
+    public Discount findById(Long id) {
+        return (Discount) getCurrentSession()
+                .createQuery("from Discount as u where u.id=:someid")
+                .setParameter("someid", id)
+                .uniqueResult();
     }
 }

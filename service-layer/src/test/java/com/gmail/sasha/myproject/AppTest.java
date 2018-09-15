@@ -141,7 +141,8 @@ public class AppTest {
 
     @Test
     public void assignToUserItsDiscount(){
-
+UserService us = new UserServiceImpl();
+us.assignDiscountToUser();
     }
 
     /**

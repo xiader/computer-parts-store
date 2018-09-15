@@ -9,5 +9,5 @@ import java.util.List;
 public interface DiscountDao extends GenericDao<Discount> {
     List<Discount> findDiscountByinterestRate(BigDecimal interestRate);
 
-
+    Discount findById(Long id);
 }
