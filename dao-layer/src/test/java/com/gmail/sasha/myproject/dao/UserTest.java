@@ -139,4 +139,10 @@ public class UserTest {
         assertTrue(id != 0);
         session.close();
     }
+
+    @Test
+    public void setDiscountToUser(){
+        User u =  userDao.findById(1L);
+
+    }
 }

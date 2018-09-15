@@ -121,10 +121,11 @@ public class AppTest {
     @Test
     public void showListItemWithDiscount(){
         ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
-
+        System.out.println("===========");
         for (ItemWithDiscountedPrice element : itemDiscountService.showItemsWithDiscountedPrice()) {
             System.out.println(element);
         }
+        System.out.println("===========");
     }
 
     @Test
@@ -138,6 +139,10 @@ public class AppTest {
         userService.save(user);
     }
 
+    @Test
+    public void assignToUserItsDiscount(){
+
+    }
 
     /**
      * Rigorous Test :-)

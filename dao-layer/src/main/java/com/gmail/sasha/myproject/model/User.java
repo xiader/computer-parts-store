@@ -35,20 +35,19 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_id")
-    private Set<Discount> discounts = new HashSet<>();
-
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(columnDefinition="integer", name = "discount_id", nullable = true)
+    private Discount discount;
 
     public User() {
     }
 
-    public Set<Discount> getDiscounts() {
-        return discounts;
+    public Discount getDiscount() {
+        return discount;
     }
 
-    public void setDiscounts(Set<Discount> discounts) {
-        this.discounts = discounts;
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 
     public Long getId() {

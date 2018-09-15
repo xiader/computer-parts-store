@@ -20,22 +20,8 @@ public class UserDTOConverter implements DTOConverter<UserDTO, User> {
         userDTO.setSurname(entity.getSurname());
         userDTO.setEmail(entity.getEmail());
         userDTO.setPassword(entity.getPassword());
-
         return userDTO;
     }
 
 
-    @Override
-    public List<UserDTO> toDTOList(List<User> listEntities) {
-       //todo: left only one
-        List<UserDTO> userDTOListV1 = listEntities.stream().map(
-                s -> new UserDTO(s.getId(), s.getEmail(), s.getSurname(), s.getName(), s.getPassword())
-        ).collect(Collectors.toList());
-        System.out.println(userDTOListV1);
-
-        List<UserDTO> userDTOListV2 = listEntities.stream()
-                .map(UserDTO::new).collect(Collectors.toList());
-        System.out.println(userDTOListV2);
-        return userDTOListV2;
-    }
 }

@@ -19,6 +19,8 @@ public class UserDTO {
 
     private List<OrderDTO> orders = new ArrayList<>();
 
+    private DiscountDTO discount;
+
     public UserDTO() {
     }
 
@@ -92,6 +94,14 @@ public class UserDTO {
 
     public void setOrders(List<OrderDTO> orders) {
         this.orders = orders;
+    }
+
+    public DiscountDTO getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(DiscountDTO discount) {
+        this.discount = discount;
     }
 
     @Override

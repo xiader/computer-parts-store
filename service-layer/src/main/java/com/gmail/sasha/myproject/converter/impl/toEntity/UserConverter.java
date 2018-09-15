@@ -13,6 +13,7 @@ public class UserConverter implements EntityConverter<UserDTO, User> {
         }
         EntityConverter<RoleDTO, Role> roleEntityConverter = new RoleConverter();
         EntityConverter<OrderDTO, Order> itemConverter = new OrderConverter();
+        EntityConverter<DiscountDTO, Discount> discountConverter = new DiscountConverter();
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setId(dto.getId());
@@ -21,6 +22,7 @@ public class UserConverter implements EntityConverter<UserDTO, User> {
         user.setPassword(dto.getPassword());
         user.setRole(roleEntityConverter.toEntity(dto.getRole()));
         user.setSurname(dto.getSurname());
+        user.setDiscount(discountConverter.toEntity(dto.getDiscount()));
         return user;
     }
 }

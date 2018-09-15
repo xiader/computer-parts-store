@@ -87,8 +87,6 @@ public class Discount implements Serializable {
         this.items = items;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
