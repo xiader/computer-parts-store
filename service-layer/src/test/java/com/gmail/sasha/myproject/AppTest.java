@@ -1,15 +1,13 @@
 package com.gmail.sasha.myproject;
 
 
-import com.gmail.sasha.myproject.model.DiscountDTO;
-import com.gmail.sasha.myproject.model.ItemDTO;
-import com.gmail.sasha.myproject.model.ItemWithDiscountedPrice;
-import com.gmail.sasha.myproject.model.UserDTO;
-import com.gmail.sasha.myproject.service.*;
-import com.gmail.sasha.myproject.service.impl.*;
+import com.gmail.sasha.myproject.service.model.*;
+import com.gmail.sasha.myproject.service.service.*;
+import com.gmail.sasha.myproject.service.service.impl.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -19,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit test for simple App.
@@ -145,6 +143,13 @@ public class AppTest {
         orderService.createFourOrders();
     }
 
+
+    @Test
+    public void showInfoAboutOrders(){
+        OrderService orderService = new OrderServiceImpl();
+        List<OrderDTO>  orderDTOS = orderService.getOrdersInfo();
+
+    }
     /**
      * Rigorous Test :-)
      */

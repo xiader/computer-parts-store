@@ -1,17 +1,20 @@
 package com.gmail.sasha.myproject.dao;
 
-import com.gmail.sasha.myproject.dao.impl.ProfileDaoImpl;
-import com.gmail.sasha.myproject.model.User;
-import com.gmail.sasha.myproject.dao.impl.UserDaoImpl;
-import com.gmail.sasha.myproject.model.Profile;
+import com.gmail.sasha.myproject.dao.dao.ProfileDao;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
+import com.gmail.sasha.myproject.dao.dao.impl.ProfileDaoImpl;
+import com.gmail.sasha.myproject.dao.model.User;
+import com.gmail.sasha.myproject.dao.dao.impl.UserDaoImpl;
+import com.gmail.sasha.myproject.dao.model.Profile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class ProfileTest {
 
@@ -21,10 +24,8 @@ public class ProfileTest {
     private ProfileDao profileDao;
 
 
-    @Before
+    @BeforeAll
     public void setUp() {
-        userDao = new UserDaoImpl(User.class);
-        profileDao = new ProfileDaoImpl(Profile.class);
     }
 
     @Test

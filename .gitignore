@@ -1,18 +1,20 @@
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
+# Eclipse
+.classpath
+.project
+.settings/
 
 # Intellij
-
+.idea/
 *.iml
 *.iws
-.idea/*
 /out/
+
+# Mac
+.DS_Store
 
 # Maven
 log/
 target/
-
 
 # VCS
 *.log

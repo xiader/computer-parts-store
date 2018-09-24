@@ -1,15 +1,19 @@
 package com.gmail.sasha.myproject.dao;
 
-import com.gmail.sasha.myproject.dao.impl.AuditDaoImpl;
-import com.gmail.sasha.myproject.model.Audit;
-import com.gmail.sasha.myproject.model.User;
-import com.gmail.sasha.myproject.dao.impl.UserDaoImpl;
+import com.gmail.sasha.myproject.dao.dao.AuditDao;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
+
+import com.gmail.sasha.myproject.dao.model.Audit;
+import com.gmail.sasha.myproject.dao.model.User;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,13 +22,13 @@ public class AuditTest {
 
     private static final Logger logger = LogManager.getLogger(UserTest.class);
 
+    @Autowired
     private AuditDao auditDao;
+    @Autowired
     private UserDao userDao;
 
-    @Before
+    @BeforeAll
     public void setUp() {
-        userDao = new UserDaoImpl(User.class);
-        auditDao = new AuditDaoImpl(Audit.class);
     }
 
     @Test

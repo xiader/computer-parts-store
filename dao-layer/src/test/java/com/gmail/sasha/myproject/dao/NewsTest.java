@@ -1,19 +1,23 @@
 package com.gmail.sasha.myproject.dao;
 
-import com.gmail.sasha.myproject.dao.impl.UserDaoImpl;
-import com.gmail.sasha.myproject.model.News;
-import com.gmail.sasha.myproject.model.User;
-import com.gmail.sasha.myproject.dao.impl.NewsDaoImpl;
+import com.gmail.sasha.myproject.dao.dao.NewsDao;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
+
+import com.gmail.sasha.myproject.dao.model.News;
+import com.gmail.sasha.myproject.dao.model.User;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class NewsTest {
     private static final Logger logger = LogManager.getLogger(NewsTest.class);
@@ -21,10 +25,9 @@ public class NewsTest {
     private NewsDao newsDao;
     private UserDao userDao;
 
-    @Before
+    @BeforeAll
     public void setUp() {
-        userDao = new UserDaoImpl(User.class);
-        newsDao = new NewsDaoImpl(News.class);
+
     }
 
     @Test
@@ -38,9 +41,9 @@ public class NewsTest {
         try (Session session = newsDao.getCurrentSession()) {
             tx = session.beginTransaction();
             User someUser = userDao.findById(1L);
-            Assert.assertNotNull(someUser);
+         assertNotNull(someUser);
             news.setUser(someUser);
-            Assert.assertNotNull(news);
+         assertNotNull(news);
             newsDao.create(news);
             tx.commit();
         } catch (Exception e) {

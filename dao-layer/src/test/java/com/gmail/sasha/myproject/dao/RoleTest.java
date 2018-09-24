@@ -1,20 +1,24 @@
 package com.gmail.sasha.myproject.dao;
 
-import com.gmail.sasha.myproject.dao.impl.RoleDaoImpl;
-import com.gmail.sasha.myproject.model.Permission;
-import com.gmail.sasha.myproject.model.Role;
-import com.gmail.sasha.myproject.dao.impl.PermissionDaoImpl;
+import com.gmail.sasha.myproject.dao.dao.PermissionDao;
+import com.gmail.sasha.myproject.dao.dao.RoleDao;
+
+import com.gmail.sasha.myproject.dao.model.Permission;
+import com.gmail.sasha.myproject.dao.model.Role;
+import com.gmail.sasha.myproject.dao.dao.impl.PermissionDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class RoleTest {
 
@@ -32,10 +36,10 @@ public class RoleTest {
         assertTrue(true);
     }
 
-    @Before
+    @BeforeAll
     public void setUp() {
-        permissionDao = new PermissionDaoImpl(Permission.class);
-        roleDao = new RoleDaoImpl(Role.class);
+        permissionDao = null;
+
     }
 
 

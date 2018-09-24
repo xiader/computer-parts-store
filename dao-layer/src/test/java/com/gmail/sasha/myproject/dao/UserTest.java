@@ -1,59 +1,74 @@
 package com.gmail.sasha.myproject.dao;
 
-import com.gmail.sasha.myproject.dao.impl.RoleDaoImpl;
-import com.gmail.sasha.myproject.dao.impl.UserDaoImpl;
-import com.gmail.sasha.myproject.model.Permission;
-import com.gmail.sasha.myproject.model.Role;
-import com.gmail.sasha.myproject.model.User;
+import com.gmail.sasha.myproject.config.AppConfig;
+import com.gmail.sasha.myproject.dao.config.HibernateConfig;
+import com.gmail.sasha.myproject.dao.dao.RoleDao;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
+import com.gmail.sasha.myproject.dao.model.Permission;
+import com.gmail.sasha.myproject.dao.model.Role;
+import com.gmail.sasha.myproject.dao.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test for simple App.
- */
+
+//@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { HibernateConfig.class, AppConfig.class}, loader = AnnotationConfigContextLoader.class)
 public class UserTest {
     private static final Logger logger = LogManager.getLogger(UserTest.class);
     private long id;
-    private UserDao userDao = new UserDaoImpl(User.class);
-    private RoleDao roleDao = new RoleDaoImpl(Role.class);
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private RoleDao roleDao;
 
     @Test
-    public void shouldAnswerWithTrue() {
+    void shouldAnswerWithTrue() {
         assertTrue(true);
     }
 
-    @Before
-    public void setUp() {
-
+    @BeforeAll
+    static void setUpBefore() {
 
     }
 
+    /*@AfterAll
+    static void after() {
+        session.close();
+    }*/
+
     @Test
-    public void saveTest() {
+    //@Transactional
+    void saveTest() {
         User user = new User();
         user.setEmail("some_email@tut.by");
         user.setSurname("some_surname");
         user.setName("some_name");
         user.setPassword("1234password");
-        Session session = userDao.getCurrentSession();
-        Transaction tx = session.getTransaction();
-        tx.begin();
         userDao.create(user);
-        tx.commit();
         long id = user.getId();
         this.id = id;
         assertTrue(id != 0);
-        session.close();
     }
 
     @Test
-    public void findByIdTest() {
+    void findByIdTest() {
         User user = new User();
         user.setEmail("some_email@tut.by");
         user.setSurname("some_surname");
@@ -70,7 +85,7 @@ public class UserTest {
     }
 
     @Test
-    public void updateTest(){
+    void updateTest(){
         User user = new User();
         user.setEmail("111some_email@tut.by");
         user.setSurname("111some_surname");

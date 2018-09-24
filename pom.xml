@@ -23,7 +23,43 @@
         <jstl.version>1.2</jstl.version>
         <hibernate.version>5.3.6.Final</hibernate.version>
         <junit.version>4.12</junit.version>
+        <junit5.version>5.3.1</junit5.version>
     </properties>
+
+<dependencies>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j2.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j2.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>5.0.2.RELEASE</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>23.0</version>
+    </dependency>
+
+
+</dependencies>
+
 
     <build><finalName>shvetsov-project</finalName></build>
 </project>
