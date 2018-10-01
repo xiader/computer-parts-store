@@ -34,7 +34,7 @@ public class User implements Serializable {
     private List<Order> orders = new ArrayList<>();
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(columnDefinition="integer", name = "discount_id", nullable = true)
+    @JoinColumn(columnDefinition="bigint", name = "discount_id", nullable = true)
     private Discount discount;
 
     public User() {

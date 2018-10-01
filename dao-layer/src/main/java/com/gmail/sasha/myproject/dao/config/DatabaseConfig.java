@@ -2,6 +2,8 @@ package com.gmail.sasha.myproject.dao.config;
 
 
 import com.zaxxer.hikari.HikariDataSource;
+import liquibase.Liquibase;
+import liquibase.integration.spring.SpringLiquibase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -70,6 +73,16 @@ public class DatabaseConfig {
     }
 
     @Bean
+    public SpringLiquibase springLiquibase(DataSource dataSource){
+        SpringLiquibase springLiquibase = new SpringLiquibase();
+        springLiquibase.setDataSource(dataSource);
+        springLiquibase.setDropFirst(Boolean.TRUE);
+        springLiquibase.setChangeLog("classpath:migration/db.changelog.xml");
+        return springLiquibase;
+    }
+
+    @Bean
+    @DependsOn("springLiquibase")
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
