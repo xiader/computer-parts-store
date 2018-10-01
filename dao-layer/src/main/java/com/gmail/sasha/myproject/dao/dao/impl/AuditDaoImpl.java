@@ -11,7 +11,7 @@ import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class AuditDaoImpl extends GenericDaoImpl<Audit> implements AuditDao {
 
     public AuditDaoImpl() {

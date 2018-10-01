@@ -13,7 +13,7 @@ import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class DiscountDaoImpl extends GenericDaoImpl<Discount> implements DiscountDao {
     public DiscountDaoImpl() {
         super(Discount.class);

@@ -11,7 +11,7 @@ import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class NewsDaoImpl extends GenericDaoImpl<News> implements NewsDao {
 
     public NewsDaoImpl() {

@@ -14,7 +14,7 @@ import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
 
 

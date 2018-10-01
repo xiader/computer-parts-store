@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ProfileDaoImpl extends GenericDaoImpl<Profile> implements ProfileDao {
 
     public ProfileDaoImpl() {

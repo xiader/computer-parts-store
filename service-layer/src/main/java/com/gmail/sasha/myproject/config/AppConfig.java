@@ -9,8 +9,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
 @ComponentScan(basePackages = {"com.gmail.sasha.myproject.config",
-                               "com.gmail.sasha.myproject.dao",
-                               })
+                               "com.gmail.sasha.myproject.service"})
 @PropertySource("classpath:config.properties")
 public class AppConfig {
 
@@ -18,5 +17,4 @@ public class AppConfig {
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-}
-*/
+}*/

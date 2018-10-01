@@ -1,6 +1,7 @@
 package com.gmail.sasha.myproject;
 
 
+//import com.gmail.sasha.myproject.config.AppConfig;
 import com.gmail.sasha.myproject.service.model.*;
 import com.gmail.sasha.myproject.service.service.*;
 import com.gmail.sasha.myproject.service.service.impl.*;
@@ -8,6 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -17,11 +21,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Unit test for simple App.
- */
+@ExtendWith(SpringExtension.class)
+//@ContextConfiguration(classes = {HibernateConfig.class, AppConfig.class}, loader = AnnotationConfigContextLoader.class)
 public class AppTest {
 
     private static final Logger logger = LogManager.getLogger(AppTest.class);
@@ -52,14 +54,12 @@ public class AppTest {
 
     }
 
-    @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
-    }
+    @Autowired
+    ItemService itemService;
 
     @Test
     public void createItems() {
-        ItemService itemService = new ItemServiceImpl();
+        //ItemService itemService = new ItemServiceImpl();
 
         List<ItemDTO> itemDTOList = new ArrayList<>();
 
@@ -149,6 +149,13 @@ public class AppTest {
         OrderService orderService = new OrderServiceImpl();
         List<OrderDTO>  orderDTOS = orderService.getOrdersInfo();
 
+    }
+
+    @Autowired
+    UserService userService;
+    @Test
+    void testRetrieveUsers(){
+        System.out.println( userService.getUsers());
     }
     /**
      * Rigorous Test :-)

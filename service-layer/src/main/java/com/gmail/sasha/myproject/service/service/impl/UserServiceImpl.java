@@ -1,26 +1,36 @@
 package com.gmail.sasha.myproject.service.service.impl;
 
 
+import com.gmail.sasha.myproject.dao.dao.DiscountDao;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
+import com.gmail.sasha.myproject.dao.model.Discount;
+import com.gmail.sasha.myproject.dao.model.User;
+import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
-import com.gmail.sasha.myproject.service.converter.impl.toEntity.UserConverter;
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
-import com.gmail.sasha.myproject.dao.dao.DiscountDao;
-import com.gmail.sasha.myproject.dao.dao.impl.DiscountDaoImpl;
-import com.gmail.sasha.myproject.dao.model.Discount;
-import com.gmail.sasha.myproject.dao.dao.UserDao;
-import com.gmail.sasha.myproject.dao.dao.impl.UserDaoImpl;
-import com.gmail.sasha.myproject.dao.model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
 public class UserServiceImpl implements UserService {
-    private UserDao userDao = null;
-    private DiscountDao discountDao = null;
-    private EntityConverter<UserDTO, User> userConverter = new UserConverter();
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private DiscountDao discountDao;
+    @Autowired
+    @Qualifier("userEntityConverter")
+    private EntityConverter<UserDTO, User> userConverter;
+
+    @Autowired
+    @Qualifier("userDTOConverter")
+    private DTOConverter<UserDTO, User> userDTOConverter;
 
     @Override
     public void save(UserDTO userDTO) {
@@ -31,8 +41,8 @@ public class UserServiceImpl implements UserService {
                 session.beginTransaction();
             }
 
-                User user = userConverter.toEntity(userDTO);
-                userDao.create(user);
+            User user = userConverter.toEntity(userDTO);
+            userDao.create(user);
 
             tx.commit();
 
@@ -55,7 +65,7 @@ public class UserServiceImpl implements UserService {
             User user = userDao.findById(1L);
             Discount ds = discountDao.findById(1L);
             user.setDiscount(ds);
-session.flush();
+            session.flush();
 
             tx.commit();
 
@@ -65,5 +75,12 @@ session.flush();
                 session.getTransaction().rollback();
             }
         }
+    }
+
+    @Override
+    public List<UserDTO> getUsers() {
+        List<User> usersList = userDao.findAll();
+        List<UserDTO> userDTOS = userDTOConverter.toDTOList(usersList);
+        return userDTOS;
     }
 }

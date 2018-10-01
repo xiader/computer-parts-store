@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class PermissionDaoImpl extends GenericDaoImpl<Permission> implements PermissionDao {
     public PermissionDaoImpl() {
         super(Permission.class);

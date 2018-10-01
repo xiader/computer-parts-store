@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE )
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CommentDaoImpl extends GenericDaoImpl<Comment> implements CommentDao {
 
     public CommentDaoImpl() {

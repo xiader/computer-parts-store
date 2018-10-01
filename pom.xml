@@ -8,11 +8,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>shvetsov-JD2-project</name>
+
     <modules>
         <module>dao-layer</module>
         <module>service-layer</module>
         <module>web-application-layer</module>
     </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -24,6 +26,10 @@
         <hibernate.version>5.3.6.Final</hibernate.version>
         <junit.version>4.12</junit.version>
         <junit5.version>5.3.1</junit5.version>
+        <ehcache.version>3.6.1</ehcache.version>
+        <hikaricp.version>3.2.0</hikaricp.version>
+        <spring.version>5.0.2.RELEASE</spring.version>
+        <guava.version>23.0</guava.version>
     </properties>
 
 <dependencies>
@@ -46,15 +52,35 @@
     </dependency>
 
     <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-web</artifactId>
+        <version>2.11.1</version>
+    </dependency>
+
+    <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-webmvc</artifactId>
-        <version>5.0.2.RELEASE</version>
+        <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit5.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+        <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>23.0</version>
+        <version>${guava.version}</version>
     </dependency>
 
 

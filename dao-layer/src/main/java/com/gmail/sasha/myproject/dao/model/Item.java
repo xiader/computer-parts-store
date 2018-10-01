@@ -1,5 +1,7 @@
 package com.gmail.sasha.myproject.dao.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -7,6 +9,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "t_item")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Item implements Serializable {
 
     @Id
