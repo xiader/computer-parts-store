@@ -8,6 +8,10 @@
                 additivity="false">
             <Appender-ref ref="fileAppender" level="DEBUG"/>
         </Logger>
+        <Logger name="org.springframework" level="ERROR"
+                additivity="false">
+            <Appender-ref ref="CONSOLE" level="ERROR"/>
+        </Logger>
 
     </Loggers>
 

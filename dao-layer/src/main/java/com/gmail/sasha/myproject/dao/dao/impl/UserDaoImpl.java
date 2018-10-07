@@ -26,4 +26,11 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
                 .setParameter("someid", id)
                 .uniqueResult();
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return (User) getCurrentSession().createQuery("from User as u where u.email=:email")
+                .setParameter("email", email)
+                .getSingleResult();
+    }
 }

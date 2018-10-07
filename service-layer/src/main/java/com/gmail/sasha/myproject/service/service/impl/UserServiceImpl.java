@@ -20,10 +20,13 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private DiscountDao discountDao;
+
     @Autowired
     @Qualifier("userEntityConverter")
     private EntityConverter<UserDTO, User> userConverter;
@@ -80,7 +83,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getUsers() {
         List<User> usersList = userDao.findAll();
-        List<UserDTO> userDTOS = userDTOConverter.toDTOList(usersList);
-        return userDTOS;
+        return userDTOConverter.toDTOList(usersList);
     }
 }

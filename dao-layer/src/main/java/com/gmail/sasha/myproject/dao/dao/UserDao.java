@@ -5,4 +5,6 @@ import com.gmail.sasha.myproject.dao.model.User;
 public interface UserDao extends GenericDao<User> {
 
     User findById(Long id);
+
+    User findByEmail(String email);
 }
