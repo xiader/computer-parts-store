@@ -70,13 +70,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> getOrdersInfo() {
+    public List<OrderDTO> getOrdersInfo(int page, int elementsOnPage) {
         Session session = itemDao.getCurrentSession();
         Transaction tx = session.getTransaction();
         if (!tx.isActive()) {
             session.beginTransaction();
         }
-        List<Order> orders = orderDao.getOrdersWithUserItemsAndPrice();
+        List<Order> orders = orderDao.getOrdersWithUserItemsAndPrice(page, elementsOnPage);
         System.out.println(orders.get(0).getUser().getName() +
                 "|" + orders.get(0).getItem().getName() + "|"
                 + orders.get(0).getQuantity() + "|" + orders.get(0).getItem().getPrice());

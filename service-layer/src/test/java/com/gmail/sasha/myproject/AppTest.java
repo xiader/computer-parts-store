@@ -147,7 +147,7 @@ public class AppTest {
     @Test
     public void showInfoAboutOrders(){
         OrderService orderService = new OrderServiceImpl();
-        List<OrderDTO>  orderDTOS = orderService.getOrdersInfo();
+        List<OrderDTO>  orderDTOS = orderService.getOrdersInfo(1, 15);
 
     }
 

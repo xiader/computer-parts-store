@@ -22,8 +22,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     @Override
     public User findById(Long id) {
         return (User) getCurrentSession()
-                .createQuery("from User as u where u.id=:someid")
-                .setParameter("someid", id)
+                .createQuery("from User as u where u.id=:id")
+                .setParameter("id", id)
                 .uniqueResult();
     }
 

@@ -2,17 +2,18 @@ package com.gmail.sasha.myproject.dao.dao;
 
 import com.gmail.sasha.myproject.dao.model.Item;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ItemDao extends GenericDao<Item>{
 
     Item findById(long itemId);
 
-    List<Item> findItemsInPriceRange(int from, int to);
+    List<Item> findItemsInPriceRange(BigDecimal from, BigDecimal to);
 
-    Item getById(int i);
+    Item getById(int id);
 
     List<Item> findAllOrderByDiscount();
 
-    Long findCountItemsInSpecificRange(int from, int to) ;
+    Long findCountItemsInSpecificRange(BigDecimal from, BigDecimal to);
 }

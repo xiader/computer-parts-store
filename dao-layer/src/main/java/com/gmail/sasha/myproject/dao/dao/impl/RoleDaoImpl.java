@@ -31,7 +31,7 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
     }
 
     @Override
-    public int unbindAllPermissonDependencies() {
+    public int unbindAllPermissionDependencies() {
         try {
             List<Role> rolesToDelete = getCurrentSession()
                     .createQuery("from Role").list();
@@ -68,7 +68,7 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void deleteAllUndependentRoles() {
+    public void deleteAllIndependentRoles() {
         List<Role> rolesToProcess = getCurrentSession().createQuery("from Role").list();
         for (Role role : rolesToProcess) {
             if (role.getPermissions().isEmpty()) {

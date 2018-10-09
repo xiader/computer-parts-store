@@ -5,7 +5,6 @@ import com.gmail.sasha.myproject.dao.dao.RoleDao;
 
 import com.gmail.sasha.myproject.dao.model.Permission;
 import com.gmail.sasha.myproject.dao.model.Role;
-import com.gmail.sasha.myproject.dao.dao.impl.PermissionDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -80,7 +79,7 @@ public class RoleTest {
         Transaction tx = null;
         try (Session session = roleDao.getCurrentSession()) {
             tx = session.beginTransaction();
-            roleDao.unbindAllPermissonDependencies();
+            roleDao.unbindAllPermissionDependencies();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -120,7 +119,7 @@ public class RoleTest {
         Transaction tx = null;
         try (Session session = roleDao.getCurrentSession()) {
             tx = session.beginTransaction();
-            roleDao.deleteAllUndependentRoles();
+            roleDao.deleteAllIndependentRoles();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

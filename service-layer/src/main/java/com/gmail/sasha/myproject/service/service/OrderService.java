@@ -7,5 +7,5 @@ import java.util.List;
 public interface OrderService {
     void createFourOrders();
 
-    List<OrderDTO> getOrdersInfo();
+    List<OrderDTO> getOrdersInfo(int page, int elementsOnPage);
 }

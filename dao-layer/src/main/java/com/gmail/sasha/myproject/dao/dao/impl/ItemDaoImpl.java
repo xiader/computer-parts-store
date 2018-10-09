@@ -7,6 +7,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
@@ -20,20 +21,23 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
 
     @Override
     public Item findById(long itemId) {
-        return (Item) getCurrentSession().createQuery("from Item as i where i.id=:someid")
-                .setParameter("someid", itemId)
+        return (Item) getCurrentSession().createQuery("from Item as i where i.id = :id")
+                .setParameter("id", itemId)
                 .uniqueResult();
     }
 
     @Override
-    public List<Item> findItemsInPriceRange(int from, int to) {
-        return getCurrentSession().createQuery("select i from Item as i where i.price between "+from+" and "+to)
+    public List<Item> findItemsInPriceRange(BigDecimal from, BigDecimal to) {
+        return getCurrentSession().createQuery("select i from Item as i where i.price between :fromPrice and :toPrice")
+                .setParameter("fromPrice", from)
+                .setParameter("toPrice", to)
                 .list();
     }
 
     @Override
-    public Item getById(int i) {
-        return (Item) getCurrentSession().createQuery("select i from Item as i where i.id =" + i)
+    public Item getById(int id) {
+        return (Item) getCurrentSession().createQuery("select i from Item as i where i.id = :id")
+                .setParameter("id", id)
                 .uniqueResult();
     }
 
@@ -45,8 +49,10 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
     }
 
     @Override
-    public Long findCountItemsInSpecificRange(int from, int to) {
-        return (Long) getCurrentSession().createQuery("select count (f.id) from Item f where f.price between "+from+" and "+to)
+    public Long findCountItemsInSpecificRange(BigDecimal from, BigDecimal to) {
+        return (Long) getCurrentSession().createQuery("select count (f.id) from Item f where f.price between :fromPrice and :toPrice")
+                .setParameter("fromPrice", from)
+                .setParameter("toPrice", to)
                 .uniqueResult();
 
     }
