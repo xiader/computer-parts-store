@@ -8,6 +8,8 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -15,6 +17,13 @@ public class CommentDaoImpl extends GenericDaoImpl<Comment> implements CommentDa
 
     public CommentDaoImpl() {
         super(Comment.class);
+    }
+
+    @Override
+    public List<Comment> findByNewsId(Long newsId) {
+        return getCurrentSession().createQuery("from Comment as c WHERE c.news.id = :newsId")
+                .setParameter("newsId", newsId)
+                .getResultList();
     }
 }
 

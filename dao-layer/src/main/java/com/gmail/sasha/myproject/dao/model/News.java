@@ -1,9 +1,11 @@
 package com.gmail.sasha.myproject.dao.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@SuppressWarnings("NullableProblems")
 @Entity
 @Table(name = "t_news")
 public class News implements Serializable {
@@ -13,9 +15,11 @@ public class News implements Serializable {
     private Long id;
 
     @Column(name = "title")
+    @NotNull
     private String title;
 
     @Column(name = "content")
+    @NotNull
     private String content;
 
     @Column(name = "date_created")
@@ -23,9 +27,15 @@ public class News implements Serializable {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "f_user_id", foreignKey=@ForeignKey(name="f_user_id_news"))
+    @NotNull
     private User user;
 
     public News() {
+    }
+
+    @PrePersist
+    public void prePersist() {
+        created = LocalDateTime.now();
     }
 
     public Long getId() {

@@ -10,4 +10,8 @@ public interface UserService {
    void assignDiscountToUser();
 
     List<UserDTO> getUsers();
+
+    UserDTO validateByEmail(String email);
+
+    UserDTO getUserById(Long id);
 }

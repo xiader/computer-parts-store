@@ -3,10 +3,13 @@ package com.gmail.sasha.myproject.dao.model;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
+@SuppressWarnings("NullableProblems")
 @Entity
 @Table(name = "t_item")
 @Cacheable
@@ -19,6 +22,8 @@ public class Item implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
+    @Size(max = 50)
     private String name;
 
     @Column(name = "description")
@@ -28,6 +33,7 @@ public class Item implements Serializable {
     private String uniqueNumber;
 
     @Column(name = "price", precision = 18, scale = 3)
+    @NotNull
     private BigDecimal price;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)

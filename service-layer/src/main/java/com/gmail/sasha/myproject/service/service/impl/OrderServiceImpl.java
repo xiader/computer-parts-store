@@ -37,9 +37,9 @@ public class OrderServiceImpl implements OrderService {
             session.beginTransaction();
         }
         User user = userDao.findById(1L);
-        List<Item> itemList = itemDao.findItemsInPriceRange(250, 450);
+        List<Item> itemList = itemDao.findItemsInPriceRange(new BigDecimal(250), new BigDecimal(450));
 
-        Long quantity = itemDao.findCountItemsInSpecificRange(250, 450);
+        Long quantity = itemDao.findCountItemsInSpecificRange(new BigDecimal(250), new BigDecimal(450));
         Order order;
         for (int i = 0; i < 4; i++) {
             Item item = itemList.get(new Random().nextInt(itemList.size()));

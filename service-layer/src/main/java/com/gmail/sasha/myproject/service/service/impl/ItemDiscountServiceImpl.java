@@ -32,7 +32,7 @@ public class ItemDiscountServiceImpl implements ItemDiscountService {
     private DTOConverter<ItemDTO, Item> itemDTOConverter;
 
     @Override
-    public void assignToRangeOfItemsCorrespondingDiscounts(int minItemPrice, int maxItemPrice, BigDecimal discountValue) {
+    public void assignToRangeOfItemsCorrespondingDiscounts(BigDecimal minItemPrice, BigDecimal maxItemPrice, BigDecimal discountValue) {
 
         Session session = itemDao.getCurrentSession();
         try {

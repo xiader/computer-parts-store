@@ -7,7 +7,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface DiscountDao extends GenericDao<Discount> {
+
     List<Discount> findDiscountByInterestRate(BigDecimal interestRate);
 
     Discount findById(Long id);
+
+    Discount findByName(String name);
 }

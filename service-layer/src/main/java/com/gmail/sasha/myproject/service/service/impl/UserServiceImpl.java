@@ -85,4 +85,17 @@ public class UserServiceImpl implements UserService {
         List<User> usersList = userDao.findAll();
         return userDTOConverter.toDTOList(usersList);
     }
+
+    @Override
+    public UserDTO validateByEmail(String email) {
+        User user = userDao.validateByEmail(email);
+        return userDTOConverter.toDTO(user);
+    }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+       return null;
+    }
+
+
 }

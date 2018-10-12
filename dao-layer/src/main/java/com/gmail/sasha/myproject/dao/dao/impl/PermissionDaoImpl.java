@@ -1,8 +1,8 @@
 package com.gmail.sasha.myproject.dao.dao.impl;
 
 
-import com.gmail.sasha.myproject.dao.dao.PermissionDao;
 import com.gmail.sasha.myproject.dao.dao.GenericDaoImpl;
+import com.gmail.sasha.myproject.dao.dao.PermissionDao;
 import com.gmail.sasha.myproject.dao.model.Permission;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -19,8 +19,8 @@ public class PermissionDaoImpl extends GenericDaoImpl<Permission> implements Per
 
     @Override
     public Permission findByName(String permissionName) {
-        return (Permission) getCurrentSession().createQuery("from Permission as p where p.name=:permissionname")
-                .setParameter("permissionname", permissionName)
+        return (Permission) getCurrentSession().createQuery("from Permission as p where p.name =: permissionName")
+                .setParameter("permissionName", permissionName)
                 .uniqueResult();
     }
 

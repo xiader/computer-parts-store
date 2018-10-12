@@ -1,9 +1,11 @@
 package com.gmail.sasha.myproject.dao.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@SuppressWarnings("NullableProblems")
 @Entity
 @Table(name = "t_comments")
 public class Comment implements Serializable {
@@ -21,10 +23,12 @@ public class Comment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "f_user_id" , foreignKey=@ForeignKey(name="f_user_id_comment"))
+    @NotNull
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="f_news_id", foreignKey=@ForeignKey(name="f_news_id_comment"))
+    @NotNull
     private News news;
 
     public Comment() {

@@ -1,9 +1,9 @@
 package com.gmail.sasha.myproject.dao.dao.impl;
 
-import com.gmail.sasha.myproject.dao.dao.RoleDao;
 import com.gmail.sasha.myproject.dao.dao.GenericDaoImpl;
-import com.gmail.sasha.myproject.dao.model.Role;
+import com.gmail.sasha.myproject.dao.dao.RoleDao;
 import com.gmail.sasha.myproject.dao.model.Permission;
+import com.gmail.sasha.myproject.dao.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.config.BeanDefinition;

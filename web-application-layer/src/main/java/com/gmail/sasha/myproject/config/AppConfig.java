@@ -1,9 +1,6 @@
 package com.gmail.sasha.myproject.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
@@ -11,7 +8,10 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
                                "com.gmail.sasha.myproject.service",
                                "com.gmail.sasha.myproject.dao",
                                "com.gmail.sasha.myproject.web"})
-@PropertySource("classpath:config.properties")
+@PropertySources({
+        @PropertySource(value = "classpath:config.properties", ignoreResourceNotFound = true),
+        @PropertySource(value = "classpath:pagepath.properties", ignoreResourceNotFound = true),
+})
 public class AppConfig {
 
     @Bean

@@ -1,6 +1,7 @@
 package com.gmail.sasha.myproject.dao.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 
+@SuppressWarnings("NullableProblems")
 @Entity
 @Table(name = "t_discount")
 public class Discount implements Serializable {
@@ -19,9 +21,11 @@ public class Discount implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "interest_rate", precision = 10, scale = 2)
+    @NotNull
     private BigDecimal interestRate;
 
     @Column(name = "date_expiration")

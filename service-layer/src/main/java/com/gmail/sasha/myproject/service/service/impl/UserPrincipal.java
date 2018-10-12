@@ -32,7 +32,7 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
                 .toArray(String[]::new);
 
         this.authorities = AuthorityUtils.createAuthorityList(authorityList);
-        logger.debug("authorithy list {}", this.authorities);
+        logger.debug("authority list {}", this.authorities);
     }
 
 

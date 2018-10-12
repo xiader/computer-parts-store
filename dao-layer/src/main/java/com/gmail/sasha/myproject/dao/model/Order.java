@@ -1,9 +1,11 @@
 package com.gmail.sasha.myproject.dao.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@SuppressWarnings("NullableProblems")
 @Entity
 @Table(name = "t_order")
 public class Order implements Serializable {
@@ -20,11 +22,13 @@ public class Order implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     //property of composite key as MapsId param
     @MapsId("itemId")
+    @NotNull
     private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY)
     //property of composite key as MapsId param
     @MapsId("userId")
+    @NotNull
     private User user;
 
 

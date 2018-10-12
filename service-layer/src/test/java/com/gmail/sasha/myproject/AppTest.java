@@ -105,9 +105,9 @@ public class AppTest {
     @Test
     public void assignDiscountsToItems() {
         ItemDiscountService itemDiscountService = new ItemDiscountServiceImpl();
-        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(200, 299, new BigDecimal(10));
-        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(300, 399, new BigDecimal(20));
-        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(400, 500, new BigDecimal(30));
+        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(new BigDecimal(200), new BigDecimal(299), new BigDecimal(10));
+        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(new BigDecimal(300), new BigDecimal(399), new BigDecimal(20));
+        itemDiscountService.assignToRangeOfItemsCorrespondingDiscounts(new BigDecimal(400), new BigDecimal(500), new BigDecimal(30));
 
     }
 

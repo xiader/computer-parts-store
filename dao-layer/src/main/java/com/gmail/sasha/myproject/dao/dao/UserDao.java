@@ -7,4 +7,6 @@ public interface UserDao extends GenericDao<User> {
     User findById(Long id);
 
     User findByEmail(String email);
+
+    User validateByEmail(String email);
 }

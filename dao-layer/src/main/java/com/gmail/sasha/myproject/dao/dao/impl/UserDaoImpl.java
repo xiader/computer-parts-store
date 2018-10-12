@@ -1,15 +1,12 @@
 package com.gmail.sasha.myproject.dao.dao.impl;
 
-import com.gmail.sasha.myproject.dao.dao.UserDao;
 import com.gmail.sasha.myproject.dao.dao.GenericDaoImpl;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
 import com.gmail.sasha.myproject.dao.model.User;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-
-import javax.transaction.Transactional;
 
 @SuppressWarnings("JpaQlInspection")
 @Repository
@@ -32,5 +29,13 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         return (User) getCurrentSession().createQuery("from User as u where u.email=:email")
                 .setParameter("email", email)
                 .getSingleResult();
+    }
+
+    @Override
+    public User validateByEmail(String email) {
+       return (User) getCurrentSession().createQuery("from User u where u.email = :email")
+                .setParameter("email", email)
+                .uniqueResult();
+
     }
 }

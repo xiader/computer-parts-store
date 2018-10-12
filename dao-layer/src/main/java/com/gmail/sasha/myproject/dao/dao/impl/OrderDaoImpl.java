@@ -16,27 +16,27 @@ import java.util.List;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
 
+    @Autowired
+    private Pagination pagination;
+
     public OrderDaoImpl() {
         super(Order.class);
     }
-
-    @Autowired
-    private Pagination pagination;
 
     @Override
     public List<Order> getOrdersWithUserItemsAndPrice(int page, int elementsOnPage) {
         return
                 getCurrentSession()
-                .createQuery("select o from Order as o")
-                .setFirstResult(pagination.calculateOffset(page, elementsOnPage))
-                .setMaxResults(elementsOnPage)
-                .list();
+                        .createQuery("select o from Order as o")
+                        .setFirstResult(pagination.calculateOffset(page, elementsOnPage))
+                        .setMaxResults(elementsOnPage)
+                        .list();
     }
 
     @Override
     public List<Order> findOrdersByUserId(Long userId, int page, int elementsOnPage) {
-        return  getCurrentSession()
-                .createQuery("from Order as o where o.user.id=:userId")
+        return getCurrentSession()
+                .createQuery("from Order as o where o.user.id = :userId")
                 .setParameter("userId", userId)
                 .setFirstResult(pagination.calculateOffset(page, elementsOnPage))
                 .setMaxResults(elementsOnPage)

@@ -21,16 +21,25 @@ public class DiscountDaoImpl extends GenericDaoImpl<Discount> implements Discoun
 
     @Override
     public List<Discount> findDiscountByInterestRate(BigDecimal interestRate) {
-        return  getCurrentSession().createQuery("select d from Discount as d where d.interestRate =:interestrate")
-                .setParameter("interestrate", interestRate)
+        return  getCurrentSession().createQuery("select d from Discount as d where d.interestRate = :interestRate")
+                .setParameter("interestRate", interestRate)
                 .list();
     }
 
     @Override
     public Discount findById(Long id) {
         return (Discount) getCurrentSession()
-                .createQuery("from Discount as u where u.id=:someid")
-                .setParameter("someid", id)
+                .createQuery("from Discount as d where d.id = :id")
+                .setParameter("id", id)
                 .uniqueResult();
     }
+
+    @Override
+    public Discount findByName(String name) {
+        return (Discount) getCurrentSession()
+                .createQuery("from Discount as d where d.name = :name")
+                .setParameter("name", name)
+                .uniqueResult();
+    }
+
 }

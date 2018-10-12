@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> getItemsInPriceRange(int from, int to) {
+    public List<ItemDTO> getItemsInPriceRange(BigDecimal from, BigDecimal to) {
         Session session = itemDao.getCurrentSession();
         try {
             Transaction tx = session.getTransaction();
