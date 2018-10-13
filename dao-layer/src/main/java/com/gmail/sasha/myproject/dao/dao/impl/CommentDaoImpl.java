@@ -20,10 +20,11 @@ public class CommentDaoImpl extends GenericDaoImpl<Comment> implements CommentDa
     }
 
     @Override
-    public List<Comment> findByNewsId(Long newsId) {
-        return getCurrentSession().createQuery("from Comment as c WHERE c.news.id = :newsId")
+    public List<Comment> findCommentsByNewsId(Long newsId) {
+        return getCurrentSession().createQuery("from Comment as c where c.news.id = :newsId order by c.created DESC")
                 .setParameter("newsId", newsId)
                 .getResultList();
     }
+
 }
 

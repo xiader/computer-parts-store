@@ -13,6 +13,11 @@
             <Appender-ref ref="CONSOLE" level="ERROR"/>
         </Logger>
 
+        <Logger name="liquibase" level="ERROR"
+                additivity="false">
+            <Appender-ref ref="CONSOLE" level="ERROR"/>
+        </Logger>
+
     </Loggers>
 
     <Appenders>

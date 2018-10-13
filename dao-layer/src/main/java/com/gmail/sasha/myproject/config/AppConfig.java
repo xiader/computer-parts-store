@@ -1,4 +1,3 @@
-/*
 
 package com.gmail.sasha.myproject.config;
 
@@ -9,8 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ComponentScan(basePackages = {"com.gmail.sasha.myproject.config",
-                               "com.gmail.sasha.myproject.dao",
+@ComponentScan(basePackages = {"com.gmail.sasha.myproject",
                                })
 @PropertySource("classpath:config.properties")
 public class AppConfig {
@@ -21,4 +19,3 @@ public class AppConfig {
     }
 }
 
-*/

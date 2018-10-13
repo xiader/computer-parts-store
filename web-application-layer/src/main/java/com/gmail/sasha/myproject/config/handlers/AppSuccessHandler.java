@@ -1,4 +1,4 @@
-package com.gmail.sasha.myproject.config;
+package com.gmail.sasha.myproject.config.handlers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

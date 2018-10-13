@@ -1,4 +1,4 @@
-package com.gmail.sasha.myproject.config;
+package com.gmail.sasha.myproject.config.handlers;
 
 
 import org.slf4j.Logger;

@@ -33,9 +33,12 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(columnDefinition="bigint", name = "discount_id", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(columnDefinition="bigint", name = "discount_id")
     private Discount discount;
+
+   /* @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BusinessCard> businessCards = new ArrayList<>();*/
 
     public User() {
     }
@@ -103,6 +106,14 @@ public class User implements Serializable {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+ /*   public List<BusinessCard> getBusinessCards() {
+        return businessCards;
+    }
+
+    public void setBusinessCards(List<BusinessCard> businessCards) {
+        this.businessCards = businessCards;
+    }*/
 
     @Override
     public boolean equals(Object o) {

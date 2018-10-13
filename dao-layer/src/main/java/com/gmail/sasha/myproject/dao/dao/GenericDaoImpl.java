@@ -3,12 +3,12 @@ package com.gmail.sasha.myproject.dao.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-@Transactional
+
 public abstract class GenericDaoImpl<T extends Serializable> implements GenericDao<T> {
 
     private Class<T> clazz;

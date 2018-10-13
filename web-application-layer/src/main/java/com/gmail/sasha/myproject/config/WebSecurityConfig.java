@@ -1,10 +1,10 @@
 package com.gmail.sasha.myproject.config;
 
+import com.gmail.sasha.myproject.config.handlers.LoggingAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);//.passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
    /* @Override
@@ -59,6 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login**").permitAll()
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/registration").permitAll()
+
+                .antMatchers("/**").permitAll()
+
                 .anyRequest().fullyAuthenticated()
 
                 .and()
@@ -79,18 +82,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
 
-              /*  .and()
+                .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler)*/
+                .accessDeniedHandler(accessDeniedHandler)
 
                 .and()
                 .csrf().disable();
     }
 
-   /* @Bean
+    @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }*/
+    }
 
     @Bean
     public GrantedAuthorityDefaults grantedAuthorityDefaults() {

@@ -9,8 +9,12 @@
             <Appender-ref ref="fileAppender" level="DEBUG"/>
             <Appender-ref ref="CONSOLE" level="INFO"/>
         </Logger>
-        <Logger name="org.hibernate" level="ERROR"
+        <Logger name="org.hibernate" level="DEBUG"
                 additivity="false">
+        </Logger>
+        <Logger name="liquibase" level="error"
+                additivity="false">
+            <Appender-ref ref="CONSOLE" level="error"/>
         </Logger>
     </Loggers>
 

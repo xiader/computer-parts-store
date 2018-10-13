@@ -1,8 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <changeSet author="xndr (generated)" id="1538417148253-1">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="xndr (generated)" id="1539361907717-1">
         <createTable tableName="t_audit">
             <column autoIncrement="true" name="audit_id" type="BIGSERIAL">
                 <constraints primaryKey="true" primaryKeyName="t_audit_pkey"/>
@@ -14,11 +12,21 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-2">
+    <changeSet author="xndr (generated)" id="1539361907717-2">
+        <createTable tableName="t_business_card">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="t_business_card_pkey"/>
+            </column>
+            <column name="full_name" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="working_phone" type="VARCHAR(255)"/>
+            <column name="f_user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xndr (generated)" id="1539361907717-3">
         <createTable tableName="t_comments">
             <column autoIncrement="true" name="comment_id" type="BIGSERIAL">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_comments_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_comments_pkey"/>
             </column>
             <column name="content" type="VARCHAR(255)"/>
             <column name="date_created" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -26,18 +34,17 @@
             <column name="f_user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-3">
+    <changeSet author="xndr (generated)" id="1539361907717-4">
         <createTable tableName="t_discount">
             <column autoIncrement="true" name="id" type="BIGSERIAL">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_discount_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_discount_pkey"/>
             </column>
             <column name="date_expiration" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="interest_rate" type="numeric(10, 2)"/>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-4">
+    <changeSet author="xndr (generated)" id="1539361907717-5">
         <createTable tableName="t_item">
             <column autoIncrement="true" name="item_id" type="BIGSERIAL">
                 <constraints primaryKey="true" primaryKeyName="t_item_pkey"/>
@@ -48,19 +55,17 @@
             <column name="unique_number" type="VARCHAR(50)"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-5">
+    <changeSet author="xndr (generated)" id="1539361907717-6">
         <createTable tableName="t_item_discount">
             <column autoIncrement="true" name="f_discount_id" type="SERIAL">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_item_discount_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_item_discount_pkey"/>
             </column>
             <column name="f_item_id" type="BIGINT">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_item_discount_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_item_discount_pkey"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-6">
+    <changeSet author="xndr (generated)" id="1539361907717-7">
         <createTable tableName="t_news">
             <column autoIncrement="true" name="news_id" type="BIGSERIAL">
                 <constraints primaryKey="true" primaryKeyName="t_news_pkey"/>
@@ -73,7 +78,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-7">
+    <changeSet author="xndr (generated)" id="1539361907717-8">
         <createTable tableName="t_order">
             <column name="date_created" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="quantity" type="INTEGER"/>
@@ -85,16 +90,15 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-8">
+    <changeSet author="xndr (generated)" id="1539361907717-9">
         <createTable tableName="t_permission">
             <column autoIncrement="true" name="permission_id" type="BIGSERIAL">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_permission_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_permission_pkey"/>
             </column>
             <column name="name" type="VARCHAR(30)"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-9">
+    <changeSet author="xndr (generated)" id="1539361907717-10">
         <createTable tableName="t_profile">
             <column name="profile_id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="t_profile_pkey"/>
@@ -103,7 +107,7 @@
             <column name="telephone" type="VARCHAR(20)"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-10">
+    <changeSet author="xndr (generated)" id="1539361907717-11">
         <createTable tableName="t_role">
             <column autoIncrement="true" name="role_id" type="BIGSERIAL">
                 <constraints primaryKey="true" primaryKeyName="t_role_pkey"/>
@@ -111,19 +115,17 @@
             <column name="name" type="VARCHAR(30)"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-11">
+    <changeSet author="xndr (generated)" id="1539361907717-12">
         <createTable tableName="t_role_permission">
             <column name="f_permission_id" type="BIGINT">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_role_permission_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_role_permission_pkey"/>
             </column>
             <column name="f_role_id" type="BIGINT">
-                <constraints primaryKey="true"
-                             primaryKeyName="t_role_permission_pkey"/>
+                <constraints primaryKey="true" primaryKeyName="t_role_permission_pkey"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-12">
+    <changeSet author="xndr (generated)" id="1539361907717-13">
         <createTable tableName="t_user">
             <column autoIncrement="true" name="user_id" type="BIGSERIAL">
                 <constraints primaryKey="true" primaryKeyName="t_user_pkey"/>
@@ -136,129 +138,50 @@
             <column name="f_role_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-13">
-        <addForeignKeyConstraint baseColumnNames="f_news_id"
-                                 baseTableName="t_comments"
-                                 constraintName="f_news_id_comment"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="news_id"
-                                 referencedTableName="t_news" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-14">
+        <addForeignKeyConstraint baseColumnNames="f_news_id" baseTableName="t_comments" constraintName="f_news_id_comment" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="news_id" referencedTableName="t_news" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-14">
-        <addForeignKeyConstraint baseColumnNames="f_role_id"
-                                 baseTableName="t_user"
-                                 constraintName="f_role_id_user"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="role_id"
-                                 referencedTableName="t_role" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-15">
+        <addForeignKeyConstraint baseColumnNames="f_role_id" baseTableName="t_user" constraintName="f_role_id_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="t_role" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-15">
-        <addForeignKeyConstraint baseColumnNames="f_user_id"
-                                 baseTableName="t_audit"
-                                 constraintName="f_user_id_audit"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="t_user" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-16">
+        <addForeignKeyConstraint baseColumnNames="f_user_id" baseTableName="t_audit" constraintName="f_user_id_audit" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="t_user" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-16">
-        <addForeignKeyConstraint baseColumnNames="f_user_id"
-                                 baseTableName="t_comments"
-                                 constraintName="f_user_id_comment"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="t_user" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-17">
+        <addForeignKeyConstraint baseColumnNames="f_user_id" baseTableName="t_business_card" constraintName="f_user_id_business_card" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="t_user" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-17">
-        <addForeignKeyConstraint baseColumnNames="f_user_id"
-                                 baseTableName="t_news"
-                                 constraintName="f_user_id_news"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="t_user" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-18">
+        <addForeignKeyConstraint baseColumnNames="f_user_id" baseTableName="t_comments" constraintName="f_user_id_comment" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="t_user" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-18">
-        <addForeignKeyConstraint baseColumnNames="item_item_id"
-                                 baseTableName="t_order"
-                                 constraintName="fkd9cs0jr4kqj04aeuo9e1ccwdp"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="item_id"
-                                 referencedTableName="t_item" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-19">
+        <addForeignKeyConstraint baseColumnNames="f_user_id" baseTableName="t_news" constraintName="f_user_id_news" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="t_user" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-19">
-        <addForeignKeyConstraint baseColumnNames="user_user_id"
-                                 baseTableName="t_order"
-                                 constraintName="fkeqyfubcelmdqy3ccksgaigtnb"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="t_user" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-20">
+        <addForeignKeyConstraint baseColumnNames="item_item_id" baseTableName="t_order" constraintName="fkd9cs0jr4kqj04aeuo9e1ccwdp" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="item_id" referencedTableName="t_item" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-20">
-        <addForeignKeyConstraint baseColumnNames="profile_id"
-                                 baseTableName="t_profile"
-                                 constraintName="fko228dsi4hbe5va6u27dy90gia"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="t_user" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-21">
+        <addForeignKeyConstraint baseColumnNames="user_user_id" baseTableName="t_order" constraintName="fkeqyfubcelmdqy3ccksgaigtnb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="t_user" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-21">
-        <addForeignKeyConstraint baseColumnNames="discount_id"
-                                 baseTableName="t_user"
-                                 constraintName="fkq2vwl175479ufx0joa8aqrh83"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id"
-                                 referencedTableName="t_discount"
-                                 validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-22">
+        <addForeignKeyConstraint baseColumnNames="profile_id" baseTableName="t_profile" constraintName="fko228dsi4hbe5va6u27dy90gia" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_id" referencedTableName="t_user" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-22">
-        <addForeignKeyConstraint baseColumnNames="f_discount_id"
-                                 baseTableName="t_item_discount"
-                                 constraintName="foreign_key_discount_id"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id"
-                                 referencedTableName="t_discount"
-                                 validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-23">
+        <addForeignKeyConstraint baseColumnNames="discount_id" baseTableName="t_user" constraintName="fkq2vwl175479ufx0joa8aqrh83" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="t_discount" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-23">
-        <addForeignKeyConstraint baseColumnNames="f_item_id"
-                                 baseTableName="t_item_discount"
-                                 constraintName="foreign_key_item_id"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="item_id"
-                                 referencedTableName="t_item" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-24">
+        <addForeignKeyConstraint baseColumnNames="f_discount_id" baseTableName="t_item_discount" constraintName="foreign_key_discount_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="t_discount" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-24">
-        <addForeignKeyConstraint baseColumnNames="f_permission_id"
-                                 baseTableName="t_role_permission"
-                                 constraintName="foreign_key_permission_id"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="permission_id"
-                                 referencedTableName="t_permission"
-                                 validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-25">
+        <addForeignKeyConstraint baseColumnNames="f_item_id" baseTableName="t_item_discount" constraintName="foreign_key_item_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="item_id" referencedTableName="t_item" validate="true"/>
     </changeSet>
-    <changeSet author="xndr (generated)" id="1538417148253-25">
-        <addForeignKeyConstraint baseColumnNames="f_role_id"
-                                 baseTableName="t_role_permission"
-                                 constraintName="foreign_key_role_id"
-                                 deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="role_id"
-                                 referencedTableName="t_role" validate="true"/>
+    <changeSet author="xndr (generated)" id="1539361907717-26">
+        <addForeignKeyConstraint baseColumnNames="f_permission_id" baseTableName="t_role_permission" constraintName="foreign_key_permission_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="permission_id" referencedTableName="t_permission" validate="true"/>
     </changeSet>
-
-
-    <!--ROLE-->
+    <changeSet author="xndr (generated)" id="1539361907717-27">
+        <addForeignKeyConstraint baseColumnNames="f_role_id" baseTableName="t_role_permission" constraintName="foreign_key_role_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="role_id" referencedTableName="t_role" validate="true"/>
+    </changeSet>
+	
+	  <!--ROLE-->
     <changeSet author="xiader(generated)" id="1538417148253-26">
         <insert tableName="T_ROLE">
             <column name="role_id" valueNumeric="1"/>
@@ -395,6 +318,10 @@
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="29"/>
             <column name="name" value="API"/>
+        </insert>
+        <insert tableName="t_permission">
+            <column name="permission_id" valueNumeric="30"/>
+            <column name="name" value="MANAGE_BUSINESS_CARD"/>
         </insert>
     </changeSet>
     <!--ROLE_PERMISSION-->
@@ -535,6 +462,11 @@
             <column name="f_role_id" valueNumeric="4"/>
             <column name="f_permission_id" valueNumeric="29"/>
         </insert>
+
+        <insert tableName="t_role_permission">
+            <column name="f_role_id" valueNumeric="1"/>
+            <column name="f_permission_id" valueNumeric="30"/>
+        </insert>
     </changeSet>
 
     <!--USERS-->
@@ -545,7 +477,7 @@
             <column name="name" value="SECURITY"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
-            <column name="surname" value="SEC"/>
+            <column name="surname" value="surname1"/>
             <column name="f_role_id" valueNumeric="1"/>
         </insert>
         <insert tableName="t_user">
@@ -554,7 +486,7 @@
             <column name="name" value="SALE"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
-            <column name="surname" value="SEL"/>
+            <column name="surname" value="surname2"/>
             <column name="f_role_id" valueNumeric="2"/>
         </insert>
         <insert tableName="t_user">
@@ -563,7 +495,7 @@
             <column name="name" value="CUSTOMER"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
-            <column name="surname" value="CUS"/>
+            <column name="surname" value="surname3"/>
             <column name="f_role_id" valueNumeric="3"/>
         </insert>
         <insert tableName="T_USER">
@@ -572,7 +504,7 @@
             <column name="name" value="API"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
-            <column name="surname" value="API"/>
+            <column name="surname" value="surname4"/>
             <column name="f_role_id" valueNumeric="4"/>
         </insert>
     </changeSet>
