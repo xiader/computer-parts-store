@@ -1,4 +1,3 @@
-/*
 package com.gmail.sasha.myproject.config.handlers;
 
 import com.gmail.sasha.myproject.web.controllers.PageProperties;
@@ -22,4 +21,4 @@ public class ApplicationExceptionHandler {
         request.setAttribute("url", request.getRequestURL());
         return pageProperties.getErrorsPagePath();
     }
-}*/
+}

@@ -1,10 +1,12 @@
 package com.gmail.sasha.myproject.config;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -55,6 +57,16 @@ public class WebConfig implements WebMvcConfigurer {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(50000);
         return multipartResolver;
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("classpath:error.messages");
+        messageSource.setUseCodeAsDefaultMessage(true);
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setCacheSeconds(0);
+        return messageSource;
     }
 /*
     @Bean

@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <form:input path="workingPhone" class="form-control" placeholder="37529xxxxxxx"
-                                type="tel" pattern="375[0-9]{2}[0-9]{7}" required="true"/>
+                                required="true"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form:form>

@@ -23,10 +23,10 @@ public class BusinessCardValidator implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "workingPhone", "businessCard.workingPhone.empty");
         BusinessCardDTO businessCard = (BusinessCardDTO) object;
 
-        if (businessCard.getTitle().length() > 40) {
+        if (businessCard.getTitle().length() > 50) {
             errors.rejectValue("title", "businessCard.title.wrong.length");
         }
-        if (businessCard.getFullName().length() > 40) {
+        if (businessCard.getFullName().length() > 50) {
             errors.rejectValue("fullName", "businessCard.fullName.wrong.length");
         }
         if (businessCard.getTitle().length() > 20) {
