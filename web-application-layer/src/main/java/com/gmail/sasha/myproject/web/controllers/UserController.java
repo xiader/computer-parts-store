@@ -9,10 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -67,5 +64,31 @@ public class UserController {
     @GetMapping("/access-denied")
     public String accessDenied() {
         return "access-denied";
+    }
+
+
+    @GetMapping("/{id}/password")
+    @PreAuthorize("hasAuthority('CHANGE_USER_PASSWORD')")
+    public String getUserPassword(
+            @PathVariable("id") Long id,
+            ModelMap modelMap
+    ) {
+        UserDTO user = userService.findById(id);
+        modelMap.addAttribute("user", user);
+        return "user.password";
+    }
+
+    @PostMapping("/{id}/password")
+    @PreAuthorize("hasAuthority('CHANGE_USER_PASSWORD')")
+    public String updatePassword(
+            @ModelAttribute("user") UserDTO user,
+            @PathVariable("id") Long id,
+            @RequestParam String password,
+            ModelMap modelMap
+    ) {
+        user.setId(id);
+        modelMap.addAttribute("user", user);
+        userService.updatePassword(password, id);
+        return "redirect:/users/{id}/password";
     }
 }

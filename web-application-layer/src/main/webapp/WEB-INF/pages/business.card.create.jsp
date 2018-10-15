@@ -14,8 +14,6 @@
             <div class="form-group">
                 <a href="${pageContext.request.contextPath}/logout" class=" btn btn-primary"
                    aria-pressed="true" role="button">Log Out</a>
-                <a href="${pageContext.request.contextPath}/items" class=" btn btn-primary"
-                   aria-pressed="true" role="button">Items</a>
             </div>
             <form:form action="${pageContext.request.contextPath}" modelAttribute="businessCard" method="post">
                 <form:errors path="*" cssClass="error" element="div"/>

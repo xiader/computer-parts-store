@@ -18,4 +18,8 @@ public interface UserService {
     List<UserDTO> findAllUsers(Integer page, Integer elementsOnPage);
 
     Long getAmountOfPages();
+
+    UserDTO findById(Long id);
+
+    void updatePassword(String password, Long id);
 }

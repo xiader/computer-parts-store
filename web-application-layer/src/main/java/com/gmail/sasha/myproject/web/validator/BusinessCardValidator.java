@@ -24,13 +24,13 @@ public class BusinessCardValidator implements Validator {
         BusinessCardDTO businessCard = (BusinessCardDTO) object;
 
         if (businessCard.getTitle().length() > 40) {
-            errors.rejectValue("title", "businessCard.title.long.length");
+            errors.rejectValue("title", "businessCard.title.wrong.length");
         }
-        if (businessCard.getTitle().length() > 40) {
-            errors.rejectValue("fullName", "businessCard.fullName.long.length");
+        if (businessCard.getFullName().length() > 40) {
+            errors.rejectValue("fullName", "businessCard.fullName.wrong.length");
         }
-        if (businessCard.getTitle().length() > 12) {
-            errors.rejectValue("workingPhone", "businessCard.workingPhone.long.length");
+        if (businessCard.getTitle().length() > 20) {
+            errors.rejectValue("workingPhone", "businessCard.workingPhone.wrong.length");
         }
     }
 }

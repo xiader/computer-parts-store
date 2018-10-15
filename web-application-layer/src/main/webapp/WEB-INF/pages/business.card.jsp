@@ -4,18 +4,19 @@
 <head>
     <jsp:include page="/WEB-INF/pages/util/head.jsp"/>
     <title>Business Card page</title>
+
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-12">
-            <form action="${pageContext.request.contextPath}/items" method="get">
+
                 <div class="row">
                     <div class="col-md-12">
                         <a href="${pageContext.request.contextPath}/logout" class=" btn btn-primary"
                            aria-pressed="true" role="button">Log Out</a>
-                        <button type="submit" class="btn btn-primary">Items</button>
+
                     </div>
                 </div>
                 <div class="row">
@@ -48,8 +49,26 @@
                         </table>
                     </div>
                 </div>
-            </form>
+
         </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="${pageContext.request.contextPath}/business-card/cards" class=" btnbtn-primary"
+                   aria-pressed="true" role="button">Cards</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="${pageContext.request.contextPath}/business-card/card" class="btn btn-primary"
+                   aria-pressed="true" role="button">Add Card</a>
+            </div>
+        </div>
+
+
+
         <div class="col-md-2"></div>
     </div>
 </div>

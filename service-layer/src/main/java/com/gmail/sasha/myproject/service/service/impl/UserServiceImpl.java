@@ -7,6 +7,7 @@ import com.gmail.sasha.myproject.dao.model.Discount;
 import com.gmail.sasha.myproject.dao.model.User;
 import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
+import com.gmail.sasha.myproject.service.exception.UserNotFoundException;
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +16,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,7 @@ import java.util.List;
 
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
@@ -39,6 +42,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     @Qualifier("userDTOConverter")
     private DTOConverter<UserDTO, User> userDTOConverter;
+
+    @Autowired
+    @Qualifier("passwordEncoder")
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void save(UserDTO userDTO) {
@@ -86,7 +93,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public List<UserDTO> getUsers() {
         List<User> usersList = userDao.findAll();
         logger.info("--------------------");
@@ -102,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserById(Long id) {
-       return null;
+        return null;
     }
 
     @Override
@@ -114,6 +120,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long getAmountOfPages() {
         return null;
+    }
+
+    @Override
+    public UserDTO findById(Long id) {
+        User user = userDao.findOne(id);
+        if (user != null) {
+            return userDTOConverter.toDTO(user);
+        } else {
+            throw new UserNotFoundException("User with id= " + id + " was not found");
+        }
+    }
+
+    @Override
+    public void updatePassword(String password, Long userId) {
+        User updateUser = userDao.findOne(userId);
+        updateUser.setPassword(passwordEncoder.encode(password));
+        userDao.update(updateUser);
     }
 
 
