@@ -8,15 +8,16 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.Collection;
 
-@Service("appSuccessHandler")
+@Component("appSuccessHandler")
 public class AppSuccessHandler implements AuthenticationSuccessHandler {
 
     private static final Logger logger = LogManager.getLogger(AppSuccessHandler.class);
@@ -48,27 +49,39 @@ public class AppSuccessHandler implements AuthenticationSuccessHandler {
         redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, targetUrl);
     }
 
-    private String determineTargetUrl(Authentication authentication) {
+    private String determineTargetUrl(Authentication authentication) throws AccessDeniedException {
 
         boolean isUser = false;
         boolean isAdmin = false;
+        boolean isSaleUser = false;
+        boolean isApi = false;
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority :
                 authorities) {
-            if (grantedAuthority.getAuthority().equals("VIEW_DOCUMENTS")) {
-                isUser = true;
-                break;
-            } else if (grantedAuthority.getAuthority().equals("VIEW_USERS")) {
-                logger.debug("we entred to assecc admin");
-                isAdmin = true;
-                break;
+            switch (grantedAuthority.getAuthority()) {
+                case "CUSTOMER_PERMISSION":
+                    isUser = true;
+                    break;
+                case "ADMIN_PERMISSION":
+                    isAdmin = true;
+                    break;
+                case "SALE_USER_UPLOAD_ITEM":
+                    isSaleUser = true;
+                    break;
+                case "API_PERMISSIONS":
+                    isApi = true;
+                    break;
             }
         }
         if (isUser) {
-            return "/documents";
+            return "/items";
         } else if (isAdmin) {
             return "/users";
+        } else if (isSaleUser) {
+            return "/store";
+        }else if (isApi) {
+            throw new AccessDeniedException("Access denied: you is an api user");
         } else {
             throw new IllegalStateException();
         }

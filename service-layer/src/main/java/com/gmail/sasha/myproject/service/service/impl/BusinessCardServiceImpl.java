@@ -1,7 +1,9 @@
 package com.gmail.sasha.myproject.service.service.impl;
 
 import com.gmail.sasha.myproject.dao.dao.BusinessCardDao;
+import com.gmail.sasha.myproject.dao.dao.UserDao;
 import com.gmail.sasha.myproject.dao.model.BusinessCard;
+import com.gmail.sasha.myproject.dao.model.User;
 import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
 import com.gmail.sasha.myproject.service.model.BusinessCardDTO;
@@ -22,6 +24,9 @@ public class BusinessCardServiceImpl implements BusinessCardService {
 
     @Autowired
     private BusinessCardDao businessCardDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     @Qualifier("businessCardEntityConverter")
@@ -47,6 +52,22 @@ public class BusinessCardServiceImpl implements BusinessCardService {
                 .toDTOList(businessCardDao
                         .getAllByUserId(userId));
     }
+
+    @Override
+    @Transactional
+    public List<BusinessCardDTO> findAllByUserEmail(String email) {
+        return businessCardDTOConverter.toDTOList(businessCardDao.findBusinessCardsByUserEmail(email));
+    }
+
+    @Override
+    @Transactional
+    public void saveBusinessCardWithUser(BusinessCardDTO businessCardDTO, String email) {
+        BusinessCard businessCard = businessCardConverter.toEntity(businessCardDTO);
+        User user = userDao.findByEmail(email);
+        businessCard.setUser(user);
+        businessCardDao.create(businessCard);
+    }
+
 
     @Override
     @Transactional
@@ -77,4 +98,6 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     public void removeById(Long id) {
         businessCardDao.deleteById(id);
     }
+
+
 }

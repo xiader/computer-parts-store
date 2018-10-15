@@ -6,7 +6,7 @@ import com.gmail.sasha.myproject.dao.model.User;
 import org.springframework.stereotype.Component;
 
 @Component("userDTOConverter")
-public class UserDTOConverter implements DTOConverter<UserDTO, User> {
+public class  UserDTOConverter implements DTOConverter<UserDTO, User> {
 
     @Override
     public UserDTO toDTO(User entity) {

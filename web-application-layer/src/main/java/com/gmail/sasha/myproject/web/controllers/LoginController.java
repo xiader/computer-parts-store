@@ -1,21 +1,34 @@
 package com.gmail.sasha.myproject.web.controllers;
 
 import com.gmail.sasha.myproject.service.model.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
 
+    @Autowired
+    @Qualifier("pageProperties")
+    private PageProperties pageProperties;
+
     @GetMapping("/login")
     public String getLoginPage(ModelMap modelMap) {
         modelMap.addAttribute("user", new UserDTO());
-        return "login";
+        return pageProperties.getLoginPagePath();
     }
-/*
+
     @RequestMapping(value = "/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -24,6 +37,6 @@ public class LoginController {
         }
         return "redirect:/login";
     }
-*/
+
 
 }

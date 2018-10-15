@@ -14,4 +14,8 @@ public interface UserService {
     UserDTO validateByEmail(String email);
 
     UserDTO getUserById(Long id);
+
+    List<UserDTO> findAllUsers(Integer page, Integer elementsOnPage);
+
+    Long getAmountOfPages();
 }

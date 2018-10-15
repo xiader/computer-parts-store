@@ -1,4 +1,4 @@
-package com.gmail.sasha.myproject.validator;
+package com.gmail.sasha.myproject.web.validator;
 
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import org.springframework.stereotype.Component;
@@ -6,17 +6,16 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotNull;
 import java.util.regex.Pattern;
 @Component("userValidator")
 public class UserValidator implements Validator {
     @Override
-    public boolean supports(@NotNull Class<?> clazz) {
+    public boolean supports(Class<?> clazz) {
         return UserDTO.class.equals(clazz);
     }
 
     @Override
-    public void validate(Object object, @NotNull Errors errors) {
+    public void validate(Object object, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "surname", "user.surname.empty");
         ValidationUtils.rejectIfEmpty(errors, "name", "user.name.empty");
         ValidationUtils.rejectIfEmpty(errors, "email", "user.email.empty");

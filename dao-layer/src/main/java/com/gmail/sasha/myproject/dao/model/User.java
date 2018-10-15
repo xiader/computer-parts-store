@@ -26,6 +26,9 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "status")
+    private String status = "active";
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "f_role_id", foreignKey=@ForeignKey(name="f_role_id_user"))
     private Role role;
@@ -114,6 +117,14 @@ public class User implements Serializable {
     public void setBusinessCards(List<BusinessCard> businessCards) {
         this.businessCards = businessCards;
     }*/
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {

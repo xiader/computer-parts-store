@@ -12,7 +12,6 @@ import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class BusinessCardDaoImpl extends GenericDaoImpl<BusinessCard> implements BusinessCardDao {
     public BusinessCardDaoImpl() {
         super(BusinessCard.class);
@@ -32,6 +31,14 @@ public class BusinessCardDaoImpl extends GenericDaoImpl<BusinessCard> implements
         return getCurrentSession()
                 .createQuery("from BusinessCard as b where b.user.id=:userId")
                 .setParameter("userId", userId)
+                .list();
+    }
+
+    @Override
+    public List<BusinessCard> findBusinessCardsByUserEmail(String email) {
+        return getCurrentSession()
+                .createQuery("from BusinessCard as b where b.user.email=:email")
+                .setParameter("email", email)
                 .list();
     }
 }

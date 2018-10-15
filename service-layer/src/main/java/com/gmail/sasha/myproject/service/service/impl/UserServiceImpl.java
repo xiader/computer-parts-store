@@ -9,17 +9,22 @@ import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDao userDao;
@@ -81,8 +86,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public List<UserDTO> getUsers() {
         List<User> usersList = userDao.findAll();
+        logger.info("--------------------");
+        logger.info(usersList);
         return userDTOConverter.toDTOList(usersList);
     }
 
@@ -95,6 +103,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUserById(Long id) {
        return null;
+    }
+
+    @Override
+    public List<UserDTO> findAllUsers(Integer page, Integer elementsOnPage) {
+        List<User> users = userDao.getAllUsersPaginated(page, elementsOnPage);
+        return userDTOConverter.toDTOList(users);
+    }
+
+    @Override
+    public Long getAmountOfPages() {
+        return null;
     }
 
 

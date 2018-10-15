@@ -9,6 +9,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.gmail.sasha"})
+//@ComponentScan(basePackages = {"com.gmail.sasha"})
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -47,6 +48,13 @@ public class WebConfig implements WebMvcConfigurer {
         builder.dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm"));
         builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(50000);
+        return multipartResolver;
     }
 /*
     @Bean

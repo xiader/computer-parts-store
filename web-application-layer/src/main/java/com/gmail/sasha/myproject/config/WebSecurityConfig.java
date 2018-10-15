@@ -1,5 +1,6 @@
 package com.gmail.sasha.myproject.config;
 
+import com.gmail.sasha.myproject.config.handlers.AppSuccessHandler;
 import com.gmail.sasha.myproject.config.handlers.LoggingAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -22,36 +22,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("appSuccessHandler")
-    private AuthenticationSuccessHandler appSuccessHandler;
+    private AppSuccessHandler appSuccessHandler;
 
     @Autowired
     @Qualifier("userDetailsService")
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private LoggingAccessDeniedHandler accessDeniedHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
-   /* @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        final DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-
-        return authProvider;
-    }
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;*/
-
-    @Autowired
-    private LoggingAccessDeniedHandler accessDeniedHandler;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -59,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login**").permitAll()
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/registration").permitAll()
+                // .antMatchers("/users").permitAll()
+                //.antMatchers("/users").hasAuthority()
 
                 .antMatchers("/**").permitAll()
 
@@ -82,9 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
 
-                .and()
+            /*    .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler)
+                .accessDeniedHandler(accessDeniedHandler)*/
 
                 .and()
                 .csrf().disable();

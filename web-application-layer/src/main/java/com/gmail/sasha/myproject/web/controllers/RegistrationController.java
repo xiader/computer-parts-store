@@ -2,7 +2,7 @@ package com.gmail.sasha.myproject.web.controllers;
 
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
-import com.gmail.sasha.myproject.validator.UserValidator;
+import com.gmail.sasha.myproject.web.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

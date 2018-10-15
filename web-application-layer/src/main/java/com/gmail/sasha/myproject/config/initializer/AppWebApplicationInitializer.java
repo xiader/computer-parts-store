@@ -3,6 +3,8 @@ package com.gmail.sasha.myproject.config.initializer;
 import com.gmail.sasha.myproject.config.AppConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.validation.constraints.NotNull;
+
 public class AppWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -15,6 +17,7 @@ public class AppWebApplicationInitializer extends AbstractAnnotationConfigDispat
         return new Class[] {/*WebConfig.class*/};
     }
 
+    @NotNull
     @Override
     protected String[] getServletMappings() {
         return new String[] {"/"};

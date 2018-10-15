@@ -23,28 +23,29 @@ public class BusinessCardApiController {
 
     @GetMapping(value = "/user/{id}/cards")
     @ResponseBody
-    public List<BusinessCardDTO> getBusinessCardsByUserId(@PathVariable("id") Long id) {
+    public List<BusinessCardDTO> getBusinessCardsByUserId(
+            @PathVariable("id") Long id) {
         return cardService.getAllByUserId(id);
     }
 
-    @GetMapping(value = "/{id}")
-    @ResponseBody
-    public BusinessCardDTO getOneBusinessCardsById(@PathVariable("id") Long id) {
-        return cardService.getOneById(id);
-    }
-
-
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasAuthority('MANAGE_BUISNESS_CARD')")
-    public ResponseEntity<?> deleteBusinessCard
-            (@PathVariable(name = "id") Long id
-            ) {
+    @PreAuthorize("hasAuthority('MANAGE_BUSINESS_CARD')")
+    public ResponseEntity<?> deleteBusinessCard(
+            @PathVariable(name = "id") Long id
+    ) {
         cardService.removeById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    @ResponseBody
+    public BusinessCardDTO getOneBusinessCardsById(
+            @PathVariable("id") Long id) {
+        return cardService.getOneById(id);
+    }
+
     @GetMapping
-    @PreAuthorize("hasAuthority('MANAGE_BUISNESS_CARD')")
+    @PreAuthorize("hasAuthority('MANAGE_BUSINESS_CARD')")
     @ResponseBody
     public List<BusinessCardDTO> findAllBusinessCards() {
         return cardService.getAllBusinessCards();

@@ -19,6 +19,7 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
     private String username;
     private String password;
     private String fullName;
+    private String userStatus;
     private List<GrantedAuthority> authorities;
 
     public UserPrincipal(User user){
@@ -26,6 +27,7 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.fullName = user.getSurname() + user.getName();
+        this.userStatus = user.getStatus();
         String[] authorityList = user.getRole().getPermissions()
                 .stream()
                 .map(Permission::getName)
@@ -39,7 +41,7 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public List<GrantedAuthority> getAuthorities() {
         return this.authorities;
     }
 
@@ -65,12 +67,14 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
         return true;
+       // return userStatus.equals("activate");
+
     }
 
 

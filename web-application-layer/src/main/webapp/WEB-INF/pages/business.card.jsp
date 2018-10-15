@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <jsp:include page="/WEB-INF/pages/util/head.jsp"/>
-    <title>Ordered products page</title>
+    <title>Business Card page</title>
 </head>
 <body>
 <div class="container">
@@ -24,33 +24,24 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">order id</th>
-                                <th scope="col">user id</th>
-                                <th scope="col">item price</th>
-                                <th scope="col">item name</th>
-                                <th scope="col">created</th>
-                                <th scope="col">quantity</th>
-                                <th scope="col">status</th>
+                                <th scope="col">businessCard id</th>
+                                <th scope="col">businessCard title</th>
+                                <th scope="col">businessCard full name</th>
+                                <th scope="col">businessCard workingPhone</th>
+                                <th scope="col">businessCard user id</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${orders}" var="order">
+                            <c:forEach items="${businessCards}" var="businessCard">
                                 <tr>
                                     <th scope="row"><label>
-                                        <input type="checkbox" name="ids" value="${order.id}">
+                                        <input type="checkbox" name="ids" value="${businessCard.id}">
                                     </label></th>
-                                    <th>${order.id}</th>
-                                    <th>${order.user.id}</th>
-                                    <th>${order.item.price}</th>
-                                    <th>${order.item.name}</th>
-                                    <th>${order.created}</th>
-                                    <th>${order.quantity}</th>
-                                    <th>${order.status}</th>
-                                    <td>
-                                        <a href="${pageContext.request.contextPath}/user.ordered.items/${order.id}/delete"
-                                           class="btn btn-primary"
-                                           aria-pressed="true" role="button">Remove order</a>
-                                    </td>
+                                    <th>${businessCard.id}</th>
+                                    <th>${businessCard.title}</th>
+                                    <th>${businessCard.fullName}</th>
+                                    <th>${businessCard.workingPhone}</th>
+                                    <th>${businessCard.user.id}</th>
                                 </tr>
                             </c:forEach>
                             </tbody>

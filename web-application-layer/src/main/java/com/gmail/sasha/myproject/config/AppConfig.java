@@ -10,7 +10,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
                                "com.gmail.sasha.myproject.web"})
 @PropertySources({
         @PropertySource(value = "classpath:config.properties", ignoreResourceNotFound = true),
-        @PropertySource(value = "classpath:pagepath.properties", ignoreResourceNotFound = true),
+        @PropertySource(value = "classpath:webpagepath.properties", ignoreResourceNotFound = true),
 })
 public class AppConfig {
 

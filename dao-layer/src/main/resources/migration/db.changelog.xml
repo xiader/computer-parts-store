@@ -134,6 +134,7 @@
             <column name="name" type="VARCHAR(255)"/>
             <column name="password" type="VARCHAR(255)"/>
             <column name="surname" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
             <column name="discount_id" type="BIGINT"/>
             <column name="f_role_id" type="BIGINT"/>
         </createTable>
@@ -301,15 +302,15 @@
         </insert>
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="25"/>
-            <column name="name" value="SECURITY"/>
+            <column name="name" value="ADMIN_PERMISSION"/>
         </insert>
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="26"/>
-            <column name="name" value="CUSTOMER"/>
+            <column name="name" value="CUSTOMER_PERMISSION"/>
         </insert>
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="27"/>
-            <column name="name" value="SALE"/>
+            <column name="name" value="SALE_USER_UPLOAD_ITEMS"/>
         </insert>
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="28"/>
@@ -317,7 +318,7 @@
         </insert>
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="29"/>
-            <column name="name" value="API"/>
+            <column name="name" value="API_PERMISSION"/>
         </insert>
         <insert tableName="t_permission">
             <column name="permission_id" valueNumeric="30"/>
@@ -474,7 +475,8 @@
         <insert tableName="t_user">
             <column name="user_id" valueNumeric="1"/>
             <column name="email" value="admin@mail.ru"/>
-            <column name="name" value="SECURITY"/>
+            <column name="name" value="admin"/>
+            <column name="status" value="active"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
             <column name="surname" value="surname1"/>
@@ -483,7 +485,8 @@
         <insert tableName="t_user">
             <column name="user_id" valueNumeric="2"/>
             <column name="email" value="sale@mail.ru"/>
-            <column name="name" value="SALE"/>
+            <column name="name" value="SALE_USER_NAME"/>
+            <column name="status" value="active"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
             <column name="surname" value="surname2"/>
@@ -491,8 +494,9 @@
         </insert>
         <insert tableName="t_user">
             <column name="user_id" valueNumeric="3"/>
-            <column name="email" value="customer@gmail.com"/>
-            <column name="name" value="CUSTOMER"/>
+            <column name="email" value="customer@mail.ru"/>
+            <column name="name" value="CUSTOMER_USER_NAME"/>
+            <column name="status" value="active"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
             <column name="surname" value="surname3"/>
@@ -501,7 +505,8 @@
         <insert tableName="T_USER">
             <column name="user_id" valueNumeric="4"/>
             <column name="email" value="api@mail.ru"/>
-            <column name="name" value="API"/>
+            <column name="name" value="API_USER_NAME"/>
+            <column name="status" value="active"/>
             <column name="password"
                     value="$2a$04$dwFxQwpsfDlTZPYE0Sn2W.0tpfh42bFqWiGwBocjmD2WansnK7oIC"/>
             <column name="surname" value="surname4"/>

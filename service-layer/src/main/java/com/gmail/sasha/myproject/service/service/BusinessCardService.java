@@ -14,4 +14,8 @@ public interface BusinessCardService {
     BusinessCardDTO getOneById(Long id);
 
     void removeById(Long id);
+
+    List<BusinessCardDTO> findAllByUserEmail(String userName);
+
+    void saveBusinessCardWithUser(BusinessCardDTO businessCardDTO, String email);
 }

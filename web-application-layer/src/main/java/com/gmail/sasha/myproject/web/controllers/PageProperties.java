@@ -5,8 +5,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Objects;
 
-@Service
+@Service("pageProperties")
 public class PageProperties {
     @Autowired
     private Environment environment;
@@ -26,29 +27,44 @@ public class PageProperties {
     private String createOrderPagePath;
     private String currentUserPagePath;
     private String passwordPagePath;
+    private String businessCardPagePath;
+    private String businessCardCreatePagePath;
+
+    private Integer elementsOnPage;
 
 
     @PostConstruct
     public void initialize() {
-        this.loginPagePath = environment.getProperty("login.page.path");
-        this.usersPagePath = environment.getProperty("users.page.path");
-        this.errorsPagePath = environment.getProperty("errors.page.path");
-        this.itemsPagePath = environment.getProperty("items.page.path");
-        this.registrationPagePath = environment.getProperty("registration.page.path");
-        this.updateUserPagePath = environment.getProperty("update.user.page.path");
-        this.newsPage = environment.getProperty("news.page.path");
-        this.singleNewsPagePath = environment.getProperty("single.news.page.path");
-        this.ordersPagePath = environment.getProperty("orders.page.path");
-        this.createItemPagePath = environment.getProperty("create.item.page.path");
-        this.rolesPagePath = environment.getProperty("roles.page.path");
-        this.manageItemsPagePath = environment.getProperty("manage.items.page.path");
-        this.createOrderPagePath = environment.getProperty("create.order.page.path");
-        this.currentUserPagePath = environment.getProperty("current.user.page.path");
-        this.passwordPagePath = environment.getProperty("password.page.path");
+        this.elementsOnPage = Integer.valueOf(Objects.requireNonNull(environment.getProperty("default.elements.on.page")));
+        this.loginPagePath = environment.getProperty("login.page");
+        this.usersPagePath = environment.getProperty("users.page");
+        this.errorsPagePath = environment.getProperty("errors.page");
+        this.itemsPagePath = environment.getProperty("items.page");
+        this.registrationPagePath = environment.getProperty("registration.page");
+        this.updateUserPagePath = environment.getProperty("update.user.page");
+        this.newsPage = environment.getProperty("news.page");
+        this.singleNewsPagePath = environment.getProperty("single.news.page");
+        this.ordersPagePath = environment.getProperty("orders.page");
+        this.createItemPagePath = environment.getProperty("create.item.page");
+        this.rolesPagePath = environment.getProperty("roles.page");
+        this.manageItemsPagePath = environment.getProperty("manage.items.page");
+        this.createOrderPagePath = environment.getProperty("create.order.page");
+        this.currentUserPagePath = environment.getProperty("current.user.page");
+        this.passwordPagePath = environment.getProperty("password.page");
+        this.businessCardPagePath = environment.getProperty("business.card.page");
+        this.businessCardCreatePagePath = environment.getProperty("business.card.create.page");
     }
 
     public Environment getEnvironment() {
         return environment;
+    }
+
+    public Integer getElementsOnPage() {
+        return elementsOnPage;
+    }
+
+    public void setElementsOnPage(Integer elementsOnPage) {
+        this.elementsOnPage = elementsOnPage;
     }
 
     public String getLoginPagePath() {
@@ -169,5 +185,21 @@ public class PageProperties {
 
     public void setPasswordPagePath(String passwordPagePath) {
         this.passwordPagePath = passwordPagePath;
+    }
+
+    public String getBusinessCardPagePath() {
+        return businessCardPagePath;
+    }
+
+    public void setBusinessCardPagePath(String businessCardPagePath) {
+        this.businessCardPagePath = businessCardPagePath;
+    }
+
+    public String getBusinessCardCreatePagePath() {
+        return businessCardCreatePagePath;
+    }
+
+    public void setBusinessCardCreatePagePath(String businessCardCreatePagePath) {
+        this.businessCardCreatePagePath = businessCardCreatePagePath;
     }
 }
