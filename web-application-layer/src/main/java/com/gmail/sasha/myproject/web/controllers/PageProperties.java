@@ -1,6 +1,7 @@
 package com.gmail.sasha.myproject.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,17 @@ public class PageProperties {
     @Autowired
     private Environment environment;
 
+    private Long elementsOnPage;
+
+
     private String loginPagePath;
     private String usersPagePath;
+
+    @Value("${error.try.again}")
     private String errorsPagePath;
+
     private String itemsPagePath;
-    private String registrationPagePath;
+
     private String updateUserPagePath;
     private String newsPage;
     private String singleNewsPagePath;
@@ -30,17 +37,23 @@ public class PageProperties {
     private String businessCardPagePath;
     private String businessCardCreatePagePath;
 
-    private Integer elementsOnPage;
+    @Value("${registration.page}")
+    private String registrationPagePath;
+
+    @Value("${user.password.page}")
+    private String userPasswordPagePath;
+
+    @Value("${profile.page}")
+    private String profilePagePath;
 
 
     @PostConstruct
     public void initialize() {
-        this.elementsOnPage = Integer.valueOf(Objects.requireNonNull(environment.getProperty("default.elements.on.page")));
+        this.elementsOnPage = Long.valueOf(Objects.requireNonNull(environment.getProperty("default.elements.on.page")));
         this.loginPagePath = environment.getProperty("login.page");
         this.usersPagePath = environment.getProperty("users.page");
-        this.errorsPagePath = environment.getProperty("errors.page");
+
         this.itemsPagePath = environment.getProperty("items.page");
-        this.registrationPagePath = environment.getProperty("registration.page");
         this.updateUserPagePath = environment.getProperty("update.user.page");
         this.newsPage = environment.getProperty("news.page");
         this.singleNewsPagePath = environment.getProperty("single.news.page");
@@ -59,13 +72,11 @@ public class PageProperties {
         return environment;
     }
 
-    public Integer getElementsOnPage() {
+    public Long getElementsOnPage() {
         return elementsOnPage;
     }
 
-    public void setElementsOnPage(Integer elementsOnPage) {
-        this.elementsOnPage = elementsOnPage;
-    }
+
 
     public String getLoginPagePath() {
         return loginPagePath;
@@ -87,9 +98,6 @@ public class PageProperties {
         return errorsPagePath;
     }
 
-    public void setErrorsPagePath(String errorsPagePath) {
-        this.errorsPagePath = errorsPagePath;
-    }
 
     public String getItemsPagePath() {
         return itemsPagePath;
@@ -201,5 +209,13 @@ public class PageProperties {
 
     public void setBusinessCardCreatePagePath(String businessCardCreatePagePath) {
         this.businessCardCreatePagePath = businessCardCreatePagePath;
+    }
+
+    public String getUserPasswordPagePath() {
+        return userPasswordPagePath;
+    }
+
+    public String getProfilePagePath() {
+        return profilePagePath;
     }
 }

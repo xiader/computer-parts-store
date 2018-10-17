@@ -32,6 +32,9 @@ public class Item implements Serializable {
     @Column(name = "unique_number", columnDefinition = "VARCHAR(50)")
     private String uniqueNumber;
 
+    @Column(name = "is_avilable")
+    private Boolean available;
+
     @Column(name = "price", precision = 18, scale = 3)
     @NotNull
     private BigDecimal price;
@@ -101,6 +104,14 @@ public class Item implements Serializable {
 
     public void setDiscounts(Set<Discount> discounts) {
         this.discounts = discounts;
+    }
+
+    public Boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     @Override

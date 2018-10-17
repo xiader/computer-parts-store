@@ -5,12 +5,14 @@ import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -36,7 +38,7 @@ public class UserController {
         return pageProperties.getUsersPagePath();
     }
 
-   /* @GetMapping
+    @GetMapping
     @PreAuthorize("hasAuthority('VIEW_USERS')")
     public String getUsers(ModelMap modelMap,
                            @RequestParam(value = "page", defaultValue = "1") Integer page) {
@@ -46,7 +48,7 @@ public class UserController {
         modelMap.addAttribute("users", users);
         modelMap.addAttribute("pages", pages);
         return pageProperties.getUsersPagePath();
-    }*/
+    }
 
     @GetMapping(value = "/{id}")
     public String getUser(@PathVariable("id") Long id, ModelMap modelMap) {
@@ -75,7 +77,7 @@ public class UserController {
     ) {
         UserDTO user = userService.findById(id);
         modelMap.addAttribute("user", user);
-        return "user.password";
+        return pageProperties.getUserPasswordPagePath();
     }
 
     @PostMapping("/{id}/password")
@@ -91,4 +93,44 @@ public class UserController {
         userService.updatePassword(password, id);
         return "redirect:/users/{id}/password";
     }
+
+    @GetMapping(value = "/{id}/profile")
+    @PreAuthorize("hasAuthority('UPDATE_PROFILE')")
+    public String getUserProfile(
+            @PathVariable("id") Long id,
+            ModelMap modelMap
+    ) {
+        UserDTO user = userService.findById(id);
+        modelMap.addAttribute("user", user);
+        return pageProperties.getProfilePagePath();
+    }
+
+    @GetMapping(value = "/{id}/enable")
+    @PreAuthorize("hasAuthority('DISABLE_USER')")
+    public String enableUser(
+            @PathVariable("id") Long id
+    ) {
+        userService.enableUser(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping(value = "/{id}/disable")
+    @PreAuthorize("hasAuthority('DISABLE_USER')")
+    public String disableUser(
+            @PathVariable("id") Long id
+    ) {
+        //todo termDisabled
+        userService.disableUser(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping(value = "/{id}/delete")
+    @PreAuthorize("hasAuthority('DELETE_USER')")
+    public String deleteUser(
+            @PathVariable("id") Long id
+    ) {
+        userService.softDeleteById(id);
+        return "redirect:/users";
+    }
+
 }

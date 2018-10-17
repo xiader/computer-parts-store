@@ -1,10 +1,8 @@
 package com.gmail.sasha.myproject.dao.dao.impl;
 
-import com.gmail.sasha.myproject.dao.model.Item;
 import com.gmail.sasha.myproject.dao.dao.GenericDaoImpl;
 import com.gmail.sasha.myproject.dao.dao.ItemDao;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
+import com.gmail.sasha.myproject.dao.model.Item;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -12,7 +10,6 @@ import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
 
     public ItemDaoImpl() {
@@ -43,7 +40,7 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
 
     @Override
     public List<Item> findAllOrderByDiscount() {
-        return  getCurrentSession()
+        return getCurrentSession()
                 .createQuery("select i from Item as i join i.discounts as disc order by disc.interestRate")
                 .list();
     }
@@ -55,6 +52,12 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
                 .setParameter("toPrice", to)
                 .uniqueResult();
 
+    }
+
+    @Override
+    public Long countAvailableItems() {
+        return (Long) getCurrentSession().createQuery("select count(*) from Item as i where i.available=true")
+                .uniqueResult();
     }
 
 

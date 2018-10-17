@@ -1,6 +1,7 @@
 package com.gmail.sasha.myproject.dao.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,8 @@ public class User implements Serializable {
     @JoinColumn(columnDefinition="bigint", name = "discount_id")
     private Discount discount;
 
-   /* @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BusinessCard> businessCards = new ArrayList<>();*/
-
-    public User() {
-    }
+/*    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;*/
 
     public Discount getDiscount() {
         return discount;
@@ -110,12 +108,12 @@ public class User implements Serializable {
         this.orders = orders;
     }
 
- /*   public List<BusinessCard> getBusinessCards() {
-        return businessCards;
+   /* public Profile getProfile() {
+        return profile;
     }
 
-    public void setBusinessCards(List<BusinessCard> businessCards) {
-        this.businessCards = businessCards;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }*/
 
     public String getStatus() {

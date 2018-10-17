@@ -17,7 +17,11 @@ public class UserDTO {
 
     private String password;
 
+    private String status;
+
     private RoleDTO role;
+
+    private ProfileDTO profile;
 
     private List<OrderDTO> orders = new ArrayList<>();
 
@@ -104,6 +108,22 @@ public class UserDTO {
 
     public void setDiscount(DiscountDTO discount) {
         this.discount = discount;
+    }
+
+    public ProfileDTO getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileDTO profile) {
+        this.profile = profile;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

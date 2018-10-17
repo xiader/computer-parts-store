@@ -5,9 +5,9 @@ import com.gmail.sasha.myproject.service.model.UserDTO;
 import java.util.List;
 
 public interface UserService {
-   void save(UserDTO userDTO);
+    UserDTO save(UserDTO userDTO);
 
-   void assignDiscountToUser();
+    void assignDiscountToUser();
 
     List<UserDTO> getUsers();
 
@@ -22,4 +22,10 @@ public interface UserService {
     UserDTO findById(Long id);
 
     void updatePassword(String password, Long id);
+
+    void enableUser(Long userId);
+
+    void disableUser(Long userId);
+
+    void softDeleteById(Long userId);
 }

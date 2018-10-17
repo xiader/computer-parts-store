@@ -16,4 +16,8 @@ public interface ItemService {
     ItemDTO findById(ItemDTO itemDTO);
 
     void update(List<ItemDTO> itemsDTO);
+
+    Long countAvailableItems(Long quantity);
+
+    List<ItemDTO> getAvailableItems(Long page, Long quantity);
 }

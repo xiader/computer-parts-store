@@ -8,6 +8,7 @@ import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
 import com.gmail.sasha.myproject.service.model.BusinessCardDTO;
 import com.gmail.sasha.myproject.service.service.BusinessCardService;
+import com.gmail.sasha.myproject.service.service.UserPrincipalService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +23,25 @@ public class BusinessCardServiceImpl implements BusinessCardService {
 
     private final static Logger logger = LogManager.getLogger(BusinessCardServiceImpl.class);
 
-    @Autowired
-    private BusinessCardDao businessCardDao;
+    private final BusinessCardDao businessCardDao;
+
+    private final UserDao userDao;
+
+    private final EntityConverter<BusinessCardDTO, BusinessCard> businessCardConverter;
+
+    private final DTOConverter<BusinessCardDTO, BusinessCard> businessCardDTOConverter;
 
     @Autowired
-    private UserDao userDao;
+    private UserPrincipalService userPrincipalService;
+
 
     @Autowired
-    @Qualifier("businessCardEntityConverter")
-    private EntityConverter<BusinessCardDTO, BusinessCard> businessCardConverter;
-
-    @Autowired
-    @Qualifier("businessCardDTOConverter")
-    private DTOConverter<BusinessCardDTO, BusinessCard> businessCardDTOConverter;
-
+    public BusinessCardServiceImpl(BusinessCardDao businessCardDao, UserDao userDao, @Qualifier("businessCardEntityConverter") EntityConverter<BusinessCardDTO, BusinessCard> businessCardConverter, @Qualifier("businessCardDTOConverter") DTOConverter<BusinessCardDTO, BusinessCard> businessCardDTOConverter) {
+        this.businessCardDao = businessCardDao;
+        this.userDao = userDao;
+        this.businessCardConverter = businessCardConverter;
+        this.businessCardDTOConverter = businessCardDTOConverter;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -55,46 +61,31 @@ public class BusinessCardServiceImpl implements BusinessCardService {
 
     @Override
     @Transactional
-    public List<BusinessCardDTO> findAllByUserEmail(String email) {
-        return businessCardDTOConverter.toDTOList(businessCardDao.findBusinessCardsByUserEmail(email));
+    public List<BusinessCardDTO> findAllByCurrentUserEmail() {
+        return businessCardDTOConverter.toDTOList(
+                businessCardDao.findBusinessCardsByUserEmail(
+                        userPrincipalService.getUserPrincipalName()
+                )
+        );
     }
 
     @Override
     @Transactional
-    public void saveBusinessCardWithUser(BusinessCardDTO businessCardDTO, String email) {
+    public void save(BusinessCardDTO businessCardDTO) {
         BusinessCard businessCard = businessCardConverter.toEntity(businessCardDTO);
-        User user = userDao.findByEmail(email);
+        User user = userDao.findByEmail(userPrincipalService.getUserPrincipalName());
         businessCard.setUser(user);
         businessCardDao.create(businessCard);
-    }
-
-
-    @Override
-    @Transactional
-    public BusinessCardDTO saveBusinessCard(BusinessCardDTO businessCardDTO) {
-        System.out.println(businessCardDTO);
-        BusinessCard businessCard = businessCardConverter.toEntity(businessCardDTO);
-        System.out.println("***********");
-        System.out.println(businessCard);
-        System.out.println("***********");
-        businessCardDao.create(businessCard);
-        businessCardDao.getCurrentSession().getTransaction().commit();
-        BusinessCard received = businessCardDao.findByWorkingPhone(businessCard.getWorkingPhone());
-        System.out.println("-------------");
-        System.out.println(received);
-        System.out.println("-------------");
-        return businessCardDTOConverter.toDTO(received);
     }
 
     @Override
     @Transactional(readOnly = true)
     public BusinessCardDTO getOneById(Long id) {
-       return businessCardDTOConverter
-               .toDTO(businessCardDao
-                       .findOne(id));
+        return businessCardDTOConverter.toDTO(businessCardDao.findOne(id));
     }
 
     @Override
+    @Transactional
     public void removeById(Long id) {
         businessCardDao.deleteById(id);
     }

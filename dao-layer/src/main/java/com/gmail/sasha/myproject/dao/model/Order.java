@@ -19,14 +19,16 @@ public class Order implements Serializable {
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private OrderStatusEnum status = OrderStatusEnum.NEW;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    //property of composite key as MapsId param
     @MapsId("itemId")
     @NotNull
     private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    //property of composite key as MapsId param
     @MapsId("userId")
     @NotNull
     private User user;
@@ -73,6 +75,15 @@ public class Order implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public OrderStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatusEnum status) {
+        this.status = status;
     }
 
     @Override

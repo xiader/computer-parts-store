@@ -10,6 +10,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
@@ -67,7 +68,6 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void deleteAllIndependentRoles() {
         List<Role> rolesToProcess = getCurrentSession().createQuery("from Role").list();
         for (Role role : rolesToProcess) {
@@ -76,6 +76,13 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
             }
         }
 
+    }
+
+    @Override
+    public Role findByName(String name) {
+         return (Role) getCurrentSession().createQuery("from Role as r where r.name=:name")
+        .setParameter("name", name)
+        .getSingleResult();
     }
 
 

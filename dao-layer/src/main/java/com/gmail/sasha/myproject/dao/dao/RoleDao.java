@@ -11,4 +11,6 @@ public interface RoleDao extends GenericDao<Role> {
     int unbindPermissionsFromGivenRole(String commonRoleName);
 
     void deleteAllIndependentRoles();
+
+    Role findByName(String roleName);
 }

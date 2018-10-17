@@ -16,4 +16,7 @@ public interface ItemDao extends GenericDao<Item>{
     List<Item> findAllOrderByDiscount();
 
     Long findCountItemsInSpecificRange(BigDecimal from, BigDecimal to);
+
+    Long countAvailableItems();
+
 }

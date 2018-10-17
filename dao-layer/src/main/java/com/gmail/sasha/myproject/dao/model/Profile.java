@@ -27,6 +27,7 @@ public class Profile implements Serializable {
 
     @PrimaryKeyJoinColumn(name = "profile_id", foreignKey = @ForeignKey(name="f_profile_id_user"))
     @OneToOne(cascade = CascadeType.ALL, optional = false)
+    //@OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Profile() {

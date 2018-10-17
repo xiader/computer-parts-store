@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/api/business-cards")
+@RestController
+@RequestMapping("/api/cards")
 public class BusinessCardApiController {
 
     @Autowired
@@ -21,10 +20,11 @@ public class BusinessCardApiController {
     private BusinessCardService cardService;
 
 
-    @GetMapping(value = "/user/{id}/cards")
-    @ResponseBody
+    @GetMapping(value = "/user/{id}")
+    @PreAuthorize("hasAuthority('MANAGE_BUSINESS_CARD')")
     public List<BusinessCardDTO> getBusinessCardsByUserId(
-            @PathVariable("id") Long id) {
+            @PathVariable("id") Long id
+    ) {
         return cardService.getAllByUserId(id);
     }
 
@@ -38,7 +38,7 @@ public class BusinessCardApiController {
     }
 
     @GetMapping(value = "/{id}")
-    @ResponseBody
+    @PreAuthorize("hasAuthority('MANAGE_BUSINESS_CARD')")
     public BusinessCardDTO getOneBusinessCardsById(
             @PathVariable("id") Long id) {
         return cardService.getOneById(id);
@@ -46,7 +46,6 @@ public class BusinessCardApiController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('MANAGE_BUSINESS_CARD')")
-    @ResponseBody
     public List<BusinessCardDTO> findAllBusinessCards() {
         return cardService.getAllBusinessCards();
     }

@@ -1,7 +1,10 @@
 package com.gmail.sasha.myproject.config;
 
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 @Configuration
 @ComponentScan(basePackages = {"com.gmail.sasha.myproject.config",

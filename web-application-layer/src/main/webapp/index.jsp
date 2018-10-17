@@ -17,7 +17,7 @@
                     <c:out value="${error}"/>
                 </div>
             </c:if>
-            <form action="${pageContext.request.contextPath}/dispatcher?command=login" method="post">
+            <form action="${pageContext.request.contextPath}/login" method="post">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" value="${email}" class="form-control" id="exampleInputEmail1"
@@ -33,6 +33,12 @@
         </div>
         <div class="col-md-4"></div>
     </div>
+    <td>
+        <a href="${pageContext.request.contextPath}/registration"
+           class="btn btn-primary"
+           aria-pressed="true" role="button">Registration</a>
+    </td>
+
 </div>
 
 <jsp:include page="/WEB-INF/pages/util/js.jsp"/>

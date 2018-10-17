@@ -2,12 +2,16 @@ package com.gmail.sasha.myproject.service.service.impl;
 
 
 import com.gmail.sasha.myproject.dao.dao.DiscountDao;
+import com.gmail.sasha.myproject.dao.dao.RoleDao;
 import com.gmail.sasha.myproject.dao.dao.UserDao;
 import com.gmail.sasha.myproject.dao.model.Discount;
+import com.gmail.sasha.myproject.dao.model.Profile;
+import com.gmail.sasha.myproject.dao.model.Role;
 import com.gmail.sasha.myproject.dao.model.User;
 import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
 import com.gmail.sasha.myproject.service.exception.UserNotFoundException;
+import com.gmail.sasha.myproject.service.model.ProfileDTO;
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +20,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,45 +33,48 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
-
+    @Autowired
+    @Qualifier("saveUserConverter")
+    private EntityConverter<UserDTO, User> saveUserConverter;
+    @Autowired
+    @Qualifier("profileEntityConverter")
+    private EntityConverter<ProfileDTO, Profile> profileEntityConverter;
     @Autowired
     private UserDao userDao;
-
     @Autowired
     private DiscountDao discountDao;
-
     @Autowired
     @Qualifier("userEntityConverter")
     private EntityConverter<UserDTO, User> userConverter;
-
     @Autowired
     @Qualifier("userDTOConverter")
     private DTOConverter<UserDTO, User> userDTOConverter;
-
     @Autowired
     @Qualifier("passwordEncoder")
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
-    public void save(UserDTO userDTO) {
-        Session session = userDao.getCurrentSession();
-        try {
-            Transaction tx = session.getTransaction();
-            if (!tx.isActive()) {
-                session.beginTransaction();
-            }
+    public UserDTO save(UserDTO userDTO) {
+        User userToSave = saveUserConverter.toEntity(userDTO);
+        System.out.println("------------------");
+        System.out.println(userToSave);
+        userToSave.setStatus("active");
+      /*  Profile profile = profileEntityConverter.toEntity(userDTO.getProfile());
 
-            User user = userConverter.toEntity(userDTO);
-            userDao.create(user);
-
-            tx.commit();
-
-
-        } catch (Exception e) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
-            }
-        }
+        System.out.println("------------------prof");
+        System.out.println(profile);
+        profile.setProfileId(userToSave.getId());
+        profile.setUser(userToSave);*/
+        Role role = roleDao.findByName("CUSTOMER_USER");
+        System.out.println("------------------role");
+        System.out.println(role);
+        userToSave.setRole(role);
+      //  userToSave.setProfile(profile);
+        userToSave.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userDao.create(userToSave);
+        return userDTOConverter.toDTO(userToSave);
     }
 
     @Override
@@ -139,5 +147,24 @@ public class UserServiceImpl implements UserService {
         userDao.update(updateUser);
     }
 
+    @Override
+    public void enableUser(Long userId) {
+        User user = userDao.findOne(userId);
+        user.setStatus("active");
+        userDao.update(user);
+    }
 
+    @Override
+    public void disableUser(Long userId) {
+        User user = userDao.findOne(userId);
+        user.setStatus("disabled");
+        userDao.update(user);
+    }
+
+    @Override
+    public void softDeleteById(Long userId) {
+        User user = userDao.findOne(userId);
+        user.setStatus("deleted");
+        userDao.update(user);
+    }
 }

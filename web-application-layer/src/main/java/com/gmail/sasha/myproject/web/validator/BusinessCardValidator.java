@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Component("businessCardValidator")
 public class BusinessCardValidator implements Validator {
+
     @Override
     public boolean supports(Class<?> clazz) {
         return BusinessCardDTO.class.equals(clazz);
@@ -18,19 +19,19 @@ public class BusinessCardValidator implements Validator {
 
     @Override
     public void validate(Object object, Errors errors) {
-        ValidationUtils.rejectIfEmpty(errors, "title", "businessCard.title.empty");
-        ValidationUtils.rejectIfEmpty(errors, "fullName", "businessCard.fullName.empty");
-        ValidationUtils.rejectIfEmpty(errors, "workingPhone", "businessCard.workingPhone.empty");
+        ValidationUtils.rejectIfEmpty(errors, "title", "card.title.empty");
+        ValidationUtils.rejectIfEmpty(errors, "fullName", "card.name.empty");
+        ValidationUtils.rejectIfEmpty(errors, "workingPhone", "card.phone.empty");
         BusinessCardDTO businessCard = (BusinessCardDTO) object;
 
         if (businessCard.getTitle().length() > 50) {
-            errors.rejectValue("title", "businessCard.title.wrong.length");
+            errors.rejectValue("title", "card.title.length.wrong");
         }
         if (businessCard.getFullName().length() > 50) {
-            errors.rejectValue("fullName", "businessCard.fullName.wrong.length");
+            errors.rejectValue("fullName", "card.name.length.wrong");
         }
-        if (businessCard.getTitle().length() > 20) {
-            errors.rejectValue("workingPhone", "businessCard.workingPhone.wrong.length");
+        if (businessCard.getWorkingPhone().length() > 20) {
+            errors.rejectValue("workingPhone", "card.phone.length.wrong");
         }
     }
 }

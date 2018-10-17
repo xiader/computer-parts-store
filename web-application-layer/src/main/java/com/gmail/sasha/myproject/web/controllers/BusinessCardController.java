@@ -2,14 +2,11 @@ package com.gmail.sasha.myproject.web.controllers;
 
 import com.gmail.sasha.myproject.service.model.BusinessCardDTO;
 import com.gmail.sasha.myproject.service.service.BusinessCardService;
-import com.gmail.sasha.myproject.service.service.impl.UserPrincipal;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -39,32 +36,13 @@ public class BusinessCardController {
     @Qualifier("businessCardValidator")
     private Validator businessCardValidator;
 
-
-
-   /* @GetMapping
-    private ResponseEntity<?> getAllBusinessCards(ModelMap modelMap){
-        List<BusinessCardDTO> businessCards = businessCardService.getAllBusinessCards();
-        System.out.println(businessCards);
-       // modelMap.addAttribute("businessCards", businessCards);
-        //return "businessCard";
-       return new ResponseEntity<>(businessCards, HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<?> saveBussinesCard(BusinessCardDTO businessCardDTO){
-       return new ResponseEntity<>(businessCardService.saveBusinessCard(businessCardDTO), HttpStatus.OK);
-
-    }*/
-
-
     @GetMapping("/cards")
     @PreAuthorize("hasAuthority('MANAGE_BUSINESS_CARD')")
     public String getBusinessCardPage(
             ModelMap modelMap
     ) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        List<BusinessCardDTO> businessCardDTOS = businessCardService.findAllByUserEmail(userPrincipal.getUsername());
+
+        List<BusinessCardDTO> businessCardDTOS = businessCardService.findAllByCurrentUserEmail();
         modelMap.addAttribute("businessCards", businessCardDTOS);
         return pageProperties.getBusinessCardPagePath();
     }
@@ -87,10 +65,7 @@ public class BusinessCardController {
             modelMap.addAttribute("businessCard", businessCard);
             return pageProperties.getBusinessCardCreatePagePath();
         } else {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-            String userName = userPrincipal.getUsername();
-            businessCardService.saveBusinessCardWithUser(businessCard, userName);
+            businessCardService.save(businessCard);
             return "redirect:/business-card/cards";
         }
     }

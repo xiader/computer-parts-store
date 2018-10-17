@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/registration")
 public class RegistrationController {
     private static final Logger logger = LogManager.getLogger(RegistrationController.class.getName());
     @Autowired
@@ -45,15 +45,11 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             modelMap.addAttribute("user", user);
             return pageProperties.getRegistrationPagePath();
-        }
-        String email = user.getEmail();
-        UserDTO validateUser = userService.validateByEmail(email);
-        if (validateUser == null) {
+        } else if (userService.validateByEmail(user.getEmail()) == null) {
             userService.save(user);
-            return pageProperties.getLoginPagePath();
+            return "redirect:/login";
         } else {
-            logger.info("This email is busy");
-            return "redirect:/";
+            return pageProperties.getErrorsPagePath();
         }
     }
 }

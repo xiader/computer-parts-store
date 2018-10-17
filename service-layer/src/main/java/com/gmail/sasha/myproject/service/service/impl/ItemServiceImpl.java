@@ -2,6 +2,7 @@ package com.gmail.sasha.myproject.service.service.impl;
 
 import com.gmail.sasha.myproject.dao.dao.ItemDao;
 import com.gmail.sasha.myproject.dao.model.Item;
+import com.gmail.sasha.myproject.service.PageCounterUtil;
 import com.gmail.sasha.myproject.service.converter.DTOConverter;
 import com.gmail.sasha.myproject.service.converter.EntityConverter;
 import com.gmail.sasha.myproject.service.model.ItemDTO;
@@ -19,6 +20,8 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
     @Autowired
+    PageCounterUtil pageCounterUtil;
+    @Autowired
     private ItemDao itemDao;
     @Autowired
     @Qualifier("itemEntityConverter")
@@ -26,7 +29,6 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     @Qualifier("itemDTOConverter")
     private DTOConverter<ItemDTO, Item> itemDTOConverter;
-
 
     @Override
     public List<ItemDTO> save(List<ItemDTO> itemList) {
@@ -127,6 +129,18 @@ public class ItemServiceImpl implements ItemService {
                 session.getTransaction().rollback();
             }
         }
+    }
+
+    @Override
+    public Long countAvailableItems(Long quantity) {
+        Long amountOfRows = itemDao.countAvailableItems();
+        pageCounterUtil.countPages(amountOfRows, quantity)
+        return null;
+    }
+
+    @Override
+    public List<ItemDTO> getAvailableItems(Long page, Long quantity) {
+        return null;
     }
 
 }

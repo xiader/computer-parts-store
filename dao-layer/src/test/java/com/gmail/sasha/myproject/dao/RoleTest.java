@@ -1,44 +1,45 @@
 package com.gmail.sasha.myproject.dao;
 
+import com.gmail.sasha.myproject.config.AppConfig;
+import com.gmail.sasha.myproject.dao.config.DatabaseConfig;
 import com.gmail.sasha.myproject.dao.dao.PermissionDao;
 import com.gmail.sasha.myproject.dao.dao.RoleDao;
-
 import com.gmail.sasha.myproject.dao.model.Permission;
 import com.gmail.sasha.myproject.dao.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {DatabaseConfig.class, AppConfig.class}, loader = AnnotationConfigContextLoader.class)
 public class RoleTest {
 
     private static final Logger logger = LogManager.getLogger(UserTest.class);
     private static final String COMMON_ROLE_NAME = "some_role";
     private static final String PERMISSION_NAME2 = "permission2";
     private static final String PERMISSION_NAME1 = "permission1";
-
+    @Autowired
     private RoleDao roleDao;
+    @Autowired
     private PermissionDao permissionDao;
 
 
     @Test
     public void shouldAnswerWithTrue() {
         assertTrue(true);
-    }
-
-    @BeforeAll
-    public void setUp() {
-        permissionDao = null;
-
     }
 
 
@@ -154,6 +155,13 @@ public class RoleTest {
         tx.begin();
         roleDao.create(role);
         tx.commit();
+    }
+
+    @Test
+    @Transactional
+    public void findRoleByName() {
+        Role role = roleDao.findByName("CUSTOMER_USER");
+        System.out.println(role);
     }
 
 
