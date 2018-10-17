@@ -3,6 +3,8 @@ package com.gmail.sasha.myproject.dao.dao.impl;
 import com.gmail.sasha.myproject.dao.dao.GenericDaoImpl;
 import com.gmail.sasha.myproject.dao.dao.ItemDao;
 import com.gmail.sasha.myproject.dao.model.Item;
+import com.gmail.sasha.myproject.dao.util.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -11,6 +13,9 @@ import java.util.List;
 @SuppressWarnings({"JpaQlInspection", "unchecked"})
 @Repository
 public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
+
+    @Autowired
+    private Pagination pagination;
 
     public ItemDaoImpl() {
         super(Item.class);
@@ -58,6 +63,14 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
     public Long countAvailableItems() {
         return (Long) getCurrentSession().createQuery("select count(*) from Item as i where i.available=true")
                 .uniqueResult();
+    }
+
+    @Override
+    public List<Item> getAvailableItems(int page, int elementsOnPage) {
+        return getCurrentSession().createQuery("from Item as i where i.available=true order by i.name desc")
+                .setFirstResult(pagination.calculateOffset(page, elementsOnPage))
+                .setMaxResults(elementsOnPage)
+                .list();
     }
 
 

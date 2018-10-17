@@ -42,8 +42,8 @@ public class UserController {
     @PreAuthorize("hasAuthority('VIEW_USERS')")
     public String getUsers(ModelMap modelMap,
                            @RequestParam(value = "page", defaultValue = "1") Integer page) {
-        Integer elementsOnPage = pageProperties.getElementsOnPage();
-        List<UserDTO> users = userService.findAllUsers(page, elementsOnPage);
+        Long elementsOnPage = pageProperties.getElementsOnPage();
+        List<UserDTO> users = userService.findAllUsers(page, Math.toIntExact(elementsOnPage));
         Long pages = userService.getAmountOfPages();
         modelMap.addAttribute("users", users);
         modelMap.addAttribute("pages", pages);

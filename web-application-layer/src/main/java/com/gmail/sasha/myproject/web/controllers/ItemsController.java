@@ -27,30 +27,31 @@ public class ItemsController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
+
 
 
     @GetMapping
     @PreAuthorize("hasAuthority('VIEW_ITEMS')")
     public String getItems(
             ModelMap modelMap,
-            @RequestParam(value = "page", defaultValue = "1") Long page
+            @RequestParam(value = "page", defaultValue = "1") Integer page
     ) {
-        Long quantity = pageProperties.getElementsOnPage();
-        List<ItemDTO> items = itemService.getAvailableItems(page, quantity);
+        Long elementsOnPage = pageProperties.getElementsOnPage();
+        List<ItemDTO> items = itemService
+                .getAvailableItems(page, Math.toIntExact(elementsOnPage));
 
-        Long pages = itemService.countAvailableItems(quantity);
+        Long pages = itemService.countAvailableItems(elementsOnPage);
         modelMap.addAttribute("items", items);
         modelMap.addAttribute("pages", pages);
         return pageProperties.getItemsPagePath();
     }
 
-    @GetMapping(value = "/{id}/order")
+   /* @GetMapping(value = "/{id}/order")
     @PreAuthorize("hasAuthority('CREATE_ORDER')")
     public String createOrder(
             @PathVariable("id") String id
     ) {
         orderService.save(Long.valueOf(id));
         return "redirect:/items";
-    }
+    }*/
 }

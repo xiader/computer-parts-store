@@ -134,13 +134,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Long countAvailableItems(Long quantity) {
         Long amountOfRows = itemDao.countAvailableItems();
-        pageCounterUtil.countPages(amountOfRows, quantity)
-        return null;
+        return  pageCounterUtil.countPages(amountOfRows, quantity);
     }
 
     @Override
-    public List<ItemDTO> getAvailableItems(Long page, Long quantity) {
-        return null;
+    public List<ItemDTO> getAvailableItems(int page, int elementsOnPage) {
+        List<Item> items = itemDao.getAvailableItems(page, elementsOnPage);
+        return itemDTOConverter.toDTOList(items);
     }
 
 }

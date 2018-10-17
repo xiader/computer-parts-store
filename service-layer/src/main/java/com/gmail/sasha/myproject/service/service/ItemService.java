@@ -19,5 +19,5 @@ public interface ItemService {
 
     Long countAvailableItems(Long quantity);
 
-    List<ItemDTO> getAvailableItems(Long page, Long quantity);
+    List<ItemDTO> getAvailableItems(int page, int quantity);
 }

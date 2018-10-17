@@ -19,4 +19,5 @@ public interface ItemDao extends GenericDao<Item>{
 
     Long countAvailableItems();
 
+    List<Item> getAvailableItems(int page, int elementsOnPage);
 }
