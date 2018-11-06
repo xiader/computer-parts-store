@@ -7,9 +7,7 @@ public class PermissionDTO {
 
     private Long id;
 
-
     private String name;
-
 
     private Set<RoleDTO> roles = new HashSet<>();
 

@@ -41,9 +41,6 @@ public class User implements Serializable {
     @JoinColumn(columnDefinition="bigint", name = "discount_id")
     private Discount discount;
 
-/*    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Profile profile;*/
-
     public Discount getDiscount() {
         return discount;
     }
@@ -107,14 +104,6 @@ public class User implements Serializable {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-
-   /* public Profile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }*/
 
     public String getStatus() {
         return status;

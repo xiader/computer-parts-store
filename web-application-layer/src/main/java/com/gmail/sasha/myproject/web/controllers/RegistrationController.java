@@ -2,11 +2,13 @@ package com.gmail.sasha.myproject.web.controllers;
 
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
+import com.gmail.sasha.myproject.web.util.PageProperties;
 import com.gmail.sasha.myproject.web.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
-    private static final Logger logger = LogManager.getLogger(RegistrationController.class.getName());
+
+    private static final Logger logger = LogManager.getLogger(RegistrationController.class);
+
     @Autowired
     private PageProperties pageProperties;
 
@@ -28,7 +32,6 @@ public class RegistrationController {
 
     @Autowired
     private UserService userService;
-
 
     @GetMapping
     public String getRegistrationPage(ModelMap modelMap) {

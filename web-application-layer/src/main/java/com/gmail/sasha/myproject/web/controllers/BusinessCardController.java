@@ -2,6 +2,7 @@ package com.gmail.sasha.myproject.web.controllers;
 
 import com.gmail.sasha.myproject.service.model.BusinessCardDTO;
 import com.gmail.sasha.myproject.service.service.BusinessCardService;
+import com.gmail.sasha.myproject.web.util.PageProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,6 @@ public class BusinessCardController {
     public String getBusinessCardPage(
             ModelMap modelMap
     ) {
-
         List<BusinessCardDTO> businessCardDTOS = businessCardService.findAllByCurrentUserEmail();
         modelMap.addAttribute("businessCards", businessCardDTOS);
         return pageProperties.getBusinessCardPagePath();

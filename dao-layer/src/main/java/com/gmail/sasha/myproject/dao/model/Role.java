@@ -24,9 +24,6 @@ public class Role implements Serializable {
     private Set<Permission> permissions = new HashSet<>();
 
 
-    public Role() {
-    }
-
     public Long getId() {
         return id;
     }

@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +21,7 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
     private String userStatus;
     private List<GrantedAuthority> authorities;
 
-    public UserPrincipal(User user){
+    public UserPrincipal(User user) {
         this.id = user.getId();
         this.username = user.getEmail();
         this.password = user.getPassword();
@@ -36,8 +35,6 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
         this.authorities = AuthorityUtils.createAuthorityList(authorityList);
         logger.debug("authority list {}", this.authorities);
     }
-
-
 
 
     @Override
@@ -73,7 +70,7 @@ public class UserPrincipal implements org.springframework.security.core.userdeta
     @Override
     public boolean isEnabled() {
         return true;
-       // return userStatus.equals("activate");
+        // return userStatus.equals("activate");
 
     }
 

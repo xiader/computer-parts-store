@@ -4,12 +4,12 @@ package com.gmail.sasha.myproject.web.controllers;
 import com.gmail.sasha.myproject.service.model.ItemDTO;
 import com.gmail.sasha.myproject.service.service.ItemService;
 import com.gmail.sasha.myproject.service.service.OrderService;
+import com.gmail.sasha.myproject.web.util.PageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,9 +27,6 @@ public class ItemsController {
     @Autowired
     private OrderService orderService;
 
-
-
-
     @GetMapping
     @PreAuthorize("hasAuthority('VIEW_ITEMS')")
     public String getItems(
@@ -45,6 +42,19 @@ public class ItemsController {
         modelMap.addAttribute("pages", pages);
         return pageProperties.getItemsPagePath();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    /* @GetMapping(value = "/{id}/order")
     @PreAuthorize("hasAuthority('CREATE_ORDER')")

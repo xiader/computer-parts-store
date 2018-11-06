@@ -30,9 +30,6 @@ public class News implements Serializable {
     @NotNull
     private User user;
 
-    public News() {
-    }
-
     @PrePersist
     public void prePersist() {
         created = LocalDateTime.now();

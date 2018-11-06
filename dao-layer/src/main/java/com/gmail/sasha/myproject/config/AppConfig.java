@@ -1,3 +1,4 @@
+/*
 
 package com.gmail.sasha.myproject.config;
 
@@ -18,3 +19,4 @@ public class AppConfig {
     }
 }
 
+*/

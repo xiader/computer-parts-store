@@ -1,6 +1,6 @@
 package com.gmail.sasha.myproject.config.handlers;
 
-import com.gmail.sasha.myproject.web.controllers.PageProperties;
+import com.gmail.sasha.myproject.web.util.PageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;

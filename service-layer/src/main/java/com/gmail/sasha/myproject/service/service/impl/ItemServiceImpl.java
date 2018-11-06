@@ -12,12 +12,14 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ItemServiceImpl implements ItemService {
     @Autowired
     PageCounterUtil pageCounterUtil;
@@ -134,7 +136,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Long countAvailableItems(Long quantity) {
         Long amountOfRows = itemDao.countAvailableItems();
-        return  pageCounterUtil.countPages(amountOfRows, quantity);
+        return pageCounterUtil.countPages(amountOfRows, quantity);
     }
 
     @Override

@@ -23,11 +23,7 @@ public class BusinessCard implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="f_user_id", foreignKey=@ForeignKey(name="f_user_id_business_card"))
-   // @NotNull
     private User user;
-
-    public BusinessCard() {
-    }
 
     public Long getId() {
         return id;

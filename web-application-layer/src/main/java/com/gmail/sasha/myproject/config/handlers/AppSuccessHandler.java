@@ -59,6 +59,8 @@ public class AppSuccessHandler implements AuthenticationSuccessHandler {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority :
                 authorities) {
+
+            //todo move in enum
             switch (grantedAuthority.getAuthority()) {
                 case "CUSTOMER_PERMISSION":
                     isUser = true;

@@ -31,9 +31,6 @@ public class Comment implements Serializable {
     @NotNull
     private News news;
 
-    public Comment() {
-    }
-
     public Long getId() {
         return id;
     }

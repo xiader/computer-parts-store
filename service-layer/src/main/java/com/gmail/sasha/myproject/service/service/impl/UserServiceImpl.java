@@ -14,13 +14,13 @@ import com.gmail.sasha.myproject.service.exception.UserNotFoundException;
 import com.gmail.sasha.myproject.service.model.ProfileDTO;
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
+import com.gmail.sasha.myproject.service.service.aspect.LogIt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,22 +56,12 @@ public class UserServiceImpl implements UserService {
     private RoleDao roleDao;
 
     @Override
+    @LogIt
     public UserDTO save(UserDTO userDTO) {
         User userToSave = saveUserConverter.toEntity(userDTO);
-        System.out.println("------------------");
-        System.out.println(userToSave);
         userToSave.setStatus("active");
-      /*  Profile profile = profileEntityConverter.toEntity(userDTO.getProfile());
-
-        System.out.println("------------------prof");
-        System.out.println(profile);
-        profile.setProfileId(userToSave.getId());
-        profile.setUser(userToSave);*/
         Role role = roleDao.findByName("CUSTOMER_USER");
-        System.out.println("------------------role");
-        System.out.println(role);
         userToSave.setRole(role);
-      //  userToSave.setProfile(profile);
         userToSave.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userDao.create(userToSave);
         return userDTOConverter.toDTO(userToSave);
@@ -103,7 +93,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getUsers() {
         List<User> usersList = userDao.findAll();
-        logger.info("--------------------");
         logger.info(usersList);
         return userDTOConverter.toDTOList(usersList);
     }

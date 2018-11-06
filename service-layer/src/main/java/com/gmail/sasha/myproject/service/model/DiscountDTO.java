@@ -14,7 +14,6 @@ public class DiscountDTO {
 
     private LocalDateTime expirationDate;
 
-
     private Set<ItemDTO> items = new HashSet<>();
 
     public DiscountDTO() {

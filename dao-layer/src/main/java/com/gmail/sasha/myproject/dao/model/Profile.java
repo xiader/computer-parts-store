@@ -30,8 +30,6 @@ public class Profile implements Serializable {
     //@OneToOne(fetch = FetchType.LAZY)
     private User user;
 
-    public Profile() {
-    }
 
     public Long getProfileId() {
         return profileId;

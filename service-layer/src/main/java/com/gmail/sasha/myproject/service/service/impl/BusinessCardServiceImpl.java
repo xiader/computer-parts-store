@@ -36,7 +36,12 @@ public class BusinessCardServiceImpl implements BusinessCardService {
 
 
     @Autowired
-    public BusinessCardServiceImpl(BusinessCardDao businessCardDao, UserDao userDao, @Qualifier("businessCardEntityConverter") EntityConverter<BusinessCardDTO, BusinessCard> businessCardConverter, @Qualifier("businessCardDTOConverter") DTOConverter<BusinessCardDTO, BusinessCard> businessCardDTOConverter) {
+    public BusinessCardServiceImpl(BusinessCardDao businessCardDao,
+                                   UserDao userDao,
+                                   @Qualifier("businessCardEntityConverter")
+                                           EntityConverter<BusinessCardDTO, BusinessCard> businessCardConverter,
+                                   @Qualifier("businessCardDTOConverter") DTOConverter<BusinessCardDTO,
+                                           BusinessCard> businessCardDTOConverter) {
         this.businessCardDao = businessCardDao;
         this.userDao = userDao;
         this.businessCardConverter = businessCardConverter;

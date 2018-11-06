@@ -21,14 +21,11 @@ public class Audit implements Serializable {
     @Column(name = "date_created")
     private LocalDateTime created;
 
-    //ask about user fetching (mb only id is preferable)
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "f_user_id",  foreignKey=@ForeignKey(name="f_user_id_audit"), nullable = false)
     @NotNull
     private User user;
-
-    public Audit() {
-    }
 
     @PrePersist
     public void prePersist() {

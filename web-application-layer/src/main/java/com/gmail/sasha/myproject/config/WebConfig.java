@@ -27,7 +27,6 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-//@ComponentScan(basePackages = {"com.gmail.sasha"})
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -68,6 +67,9 @@ public class WebConfig implements WebMvcConfigurer {
         messageSource.setCacheSeconds(0);
         return messageSource;
     }
+
+
+
 /*
     @Bean
     @Description("Thymeleaf View Resolver")

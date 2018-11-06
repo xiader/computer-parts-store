@@ -3,16 +3,15 @@ package com.gmail.sasha.myproject.web.controllers;
 
 import com.gmail.sasha.myproject.service.model.UserDTO;
 import com.gmail.sasha.myproject.service.service.UserService;
+import com.gmail.sasha.myproject.web.util.PageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -38,36 +37,14 @@ public class UserController {
         return pageProperties.getUsersPagePath();
     }
 
-    @GetMapping
-    @PreAuthorize("hasAuthority('VIEW_USERS')")
-    public String getUsers(ModelMap modelMap,
-                           @RequestParam(value = "page", defaultValue = "1") Integer page) {
-        Long elementsOnPage = pageProperties.getElementsOnPage();
-        List<UserDTO> users = userService.findAllUsers(page, Math.toIntExact(elementsOnPage));
-        Long pages = userService.getAmountOfPages();
-        modelMap.addAttribute("users", users);
-        modelMap.addAttribute("pages", pages);
-        return pageProperties.getUsersPagePath();
-    }
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('ADMIN_PERMISSION')")
     public String getUser(@PathVariable("id") Long id, ModelMap modelMap) {
         UserDTO user = userService.getUserById(id);
         modelMap.addAttribute("user", user);
         return pageProperties.getUpdateUserPagePath();
     }
-
-    @GetMapping("/test")
-    @PreAuthorize("hasAuthority('VIEW_USERS')")
-    private String getUsers2(){
-        return "login";
-    }
-
-    @GetMapping("/access-denied")
-    public String accessDenied() {
-        return "access-denied";
-    }
-
 
     @GetMapping("/{id}/password")
     @PreAuthorize("hasAuthority('CHANGE_USER_PASSWORD')")
@@ -132,5 +109,27 @@ public class UserController {
         userService.softDeleteById(id);
         return "redirect:/users";
     }
+
+
+
+
+    /* @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
+    }*/
+
+
+      /*  @GetMapping
+    @PreAuthorize("hasAuthority('VIEW_USERS')")
+    public String getUsers(ModelMap modelMap,
+                           @RequestParam(value = "page", defaultValue = "1") Integer page) {
+        Long elementsOnPage = pageProperties.getElementsOnPage();
+        List<UserDTO> users = userService.findAllUsers(page, Math.toIntExact(elementsOnPage));
+        Long pages = userService.getAmountOfPages();
+        modelMap.addAttribute("users", users);
+        modelMap.addAttribute("pages", pages);
+        return pageProperties.getUsersPagePath();
+    }*/
+
 
 }

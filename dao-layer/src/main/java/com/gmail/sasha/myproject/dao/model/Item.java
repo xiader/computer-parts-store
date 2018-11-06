@@ -32,7 +32,7 @@ public class Item implements Serializable {
     @Column(name = "unique_number", columnDefinition = "VARCHAR(50)")
     private String uniqueNumber;
 
-    @Column(name = "is_avilable")
+    @Column(name = "is_available")
     private Boolean available;
 
     @Column(name = "price", precision = 18, scale = 3)
@@ -46,9 +46,6 @@ public class Item implements Serializable {
             CascadeType.ALL
     })
     private Set<Discount> discounts = new HashSet<>();
-
-    public Item() {
-    }
 
     public Long getId() {
         return id;
@@ -147,7 +144,8 @@ public class Item implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", uniqueNumber=" + uniqueNumber +
+                ", uniqueNumber='" + uniqueNumber + '\'' +
+                ", available=" + available +
                 ", price=" + price +
                 '}';
     }

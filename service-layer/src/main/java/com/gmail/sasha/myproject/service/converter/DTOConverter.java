@@ -9,8 +9,6 @@ public interface DTOConverter<D, E> {
 
     D toDTO(E entity);
 
-
-
     default List<D> toDTOList(List<E> list){
         return list.stream()
                 .filter(Objects::nonNull)

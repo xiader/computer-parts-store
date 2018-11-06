@@ -6,11 +6,9 @@ public class AuditDTO {
 
     private Long id;
 
-
     private String eventType;
 
     private LocalDateTime created;
-
 
     private UserDTO user;
 

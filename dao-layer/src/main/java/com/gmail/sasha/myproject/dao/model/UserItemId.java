@@ -18,8 +18,6 @@ public class UserItemId implements Serializable {
         this.userId = userId;
     }
 
-    public UserItemId() {
-    }
 
     public Long getItemId() {
         return itemId;

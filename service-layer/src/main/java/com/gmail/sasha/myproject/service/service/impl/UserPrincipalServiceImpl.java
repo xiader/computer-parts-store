@@ -12,15 +12,15 @@ public class UserPrincipalServiceImpl implements UserPrincipalService {
     @Override
     public String getUserPrincipalName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserPrincipal userPrincipal  = (UserPrincipal) authentication.getPrincipal();
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         return userPrincipal.getUsername();
     }
 
 
     @Override
-    public String getUserPrincipalAuthorities(){
+    public String getUserPrincipalAuthorities() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserPrincipal userPrincipal  = (UserPrincipal) authentication.getPrincipal();
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         return userPrincipal.getAuthorities().toString();
     }
 

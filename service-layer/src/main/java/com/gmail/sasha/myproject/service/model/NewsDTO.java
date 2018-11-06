@@ -6,18 +6,13 @@ public class NewsDTO {
 
     private Long id;
 
-
     private String title;
-
 
     private String content;
 
-
     private LocalDateTime created;
 
-
     private UserDTO user;
-
 
     public NewsDTO() {
     }

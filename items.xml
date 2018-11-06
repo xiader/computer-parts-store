@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<body>
+    <item>
+        <name>Копмуктер 1</name>
+        <description>
+            Потянет ГТА 5
+        </description>
+        <uniqueNumber>1234567890-33</uniqueNumber>
+        <price>450,000</price>
+	<available>true</available>
+    </item>
+    <item>
+        <name>Компуктер мощный</name>
+        <description>
+            CRYSIS точно пойдёт
+        </description>
+	<uniqueNumber>12345678-33</uniqueNumber>
+        <price>500,500</price>
+	<available>true</available>
+    </item>
+</body>

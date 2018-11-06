@@ -33,10 +33,6 @@ public class Order implements Serializable {
     @NotNull
     private User user;
 
-
-    public Order() {
-    }
-
     public UserItemId getId() {
         return id;
     }

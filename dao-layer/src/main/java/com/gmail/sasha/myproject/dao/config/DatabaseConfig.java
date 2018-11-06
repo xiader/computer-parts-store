@@ -24,7 +24,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"com.gmail.sasha.myproject.dao"})
 public class DatabaseConfig {
 
     private static final Logger logger = LogManager.getLogger(DatabaseConfig.class);
@@ -76,7 +75,7 @@ public class DatabaseConfig {
     public SpringLiquibase springLiquibase(DataSource dataSource){
         SpringLiquibase springLiquibase = new SpringLiquibase();
         springLiquibase.setDataSource(dataSource);
-   //     springLiquibase.setDropFirst(Boolean.TRUE);
+        springLiquibase.setDropFirst(Boolean.TRUE);
         springLiquibase.setChangeLog("classpath:migration/db.changelog.xml");
         return springLiquibase;
     }

@@ -6,6 +6,8 @@ import com.gmail.sasha.myproject.dao.dao.UserDao;
 import com.gmail.sasha.myproject.dao.model.*;
 import com.gmail.sasha.myproject.service.model.OrderDTO;
 import com.gmail.sasha.myproject.service.service.OrderService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import java.util.Set;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    private static final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
+
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -31,7 +35,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void createFourOrders() {
         Session session = itemDao.getCurrentSession();
-        // try {
         Transaction tx = session.getTransaction();
         if (!tx.isActive()) {
             session.beginTransaction();
@@ -52,20 +55,8 @@ public class OrderServiceImpl implements OrderService {
             orderDao.create(order);
         }
 
-/*            for (ItemDTO itemDTO : itemList) {
-                Item item = itemConverter.toEntity(itemDTO);
-                itemDao.create(item);
-                savedItems.add(item);
-            }
-            List<ItemDTO> listItemDTo = itemDTOConverter.toDTOList(savedItems);*/
         tx.commit();
 
-
-       /* } catch (Exception e) {
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
-            }
-        }*/
 
     }
 
@@ -77,31 +68,17 @@ public class OrderServiceImpl implements OrderService {
             session.beginTransaction();
         }
         List<Order> orders = orderDao.getOrdersWithUserItemsAndPrice(page, elementsOnPage);
-        System.out.println(orders.get(0).getUser().getName() +
+        logger.info(orders.get(0).getUser().getName() +
                 "|" + orders.get(0).getItem().getName() + "|"
                 + orders.get(0).getQuantity() + "|" + orders.get(0).getItem().getPrice());
-        System.out.println(orders.get(1).getUser().getName() +
+        logger.info(orders.get(1).getUser().getName() +
                 "|" + orders.get(1).getItem().getName() + "|"
                 + orders.get(1).getQuantity() + "|" + orders.get(1).getItem().getPrice()
                 + "|" + collectDiscounts(orders.get(1).getItem().getDiscounts())
                 + "|" + (orders.get(1).getItem().getPrice().subtract(orders.get(1).getItem().getPrice().multiply(collectDiscounts(orders.get(1).getItem().getDiscounts())).divide(new BigDecimal(100)))));
-        System.out.println(orders);
 
         formOutput(orders);
-      /*  User user = userDao.findById(1L);
-        List<Item> itemList = itemDao.findItemsInPriceRange(250, 450);
 
-        Long quantity = itemDao.findCountItemsInSpecificRange(250, 450);
-        Order order = null;
-        for (int i = 0; i < 4; i++) {
-            Item item = itemList.get(new Random().nextInt(itemList.size()));
-            order  = new Order();
-            order.setCreated(LocalDateTime.now());
-            order.setQuantity(Math.toIntExact(quantity));
-            order.setId(new UserItemId(item.getId(), user.getId()));
-            order.setItem(item);
-            order.setUser(user);
-            orderDao.create(order);*/
         tx.commit();
         return new ArrayList<>();
     }
@@ -122,7 +99,8 @@ public class OrderServiceImpl implements OrderService {
                                     .multiply(collectDiscounts(orders.get(i).getItem().getDiscounts()))
                                     .divide(new BigDecimal(100)))));
             formattedStrings.add(sb.toString());
-            System.out.println(sb);
+            logger.info(formattedStrings);
+            logger.info(sb);
         }
 
     }

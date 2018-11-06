@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DiscountTest {
 
-    @Test
+  /*  @Test
     public void testDiscountSave() {
         DiscountDao discountDao = null;
 
@@ -24,7 +24,7 @@ public class DiscountTest {
         discountDao.create(discount);
         session.getTransaction().commit();
     }
-
+*/
     @Test
     public void testDiscountByInterestRate() {
         DiscountDao discountDao = null;

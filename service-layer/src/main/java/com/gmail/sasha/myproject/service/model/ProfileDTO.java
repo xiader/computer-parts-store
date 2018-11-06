@@ -2,18 +2,13 @@ package com.gmail.sasha.myproject.service.model;
 
 public class ProfileDTO {
 
-
     private Long profileId;
-
 
     private String address;
 
-
     private String telephone;
 
-
     private UserDTO user;
-
 
     public ProfileDTO() {
     }

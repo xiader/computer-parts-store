@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component("roleEntityConverter")
 public class RoleConverter implements EntityConverter<RoleDTO, Role> {
 
-
     @Autowired
     @Qualifier("permissionEntityConverter")
     private EntityConverter<PermissionDTO, Permission> permissionEntityConverter;
