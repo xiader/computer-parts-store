@@ -2,7 +2,7 @@ package com.gmail.sasha.myproject.dao;
 
 
 //import com.gmail.sasha.myproject.config.AppConfig;
-import com.gmail.sasha.myproject.config.AppConfig;
+//import com.gmail.sasha.myproject.config.AppConfig;
 import com.gmail.sasha.myproject.dao.config.DatabaseConfig;
 import com.gmail.sasha.myproject.dao.dao.RoleDao;
 import com.gmail.sasha.myproject.dao.dao.UserDao;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { DatabaseConfig.class, AppConfig.class}, loader = AnnotationConfigContextLoader.class)
+//@ContextConfiguration(classes = { DatabaseConfig.class, AppConfig.class}, loader = AnnotationConfigContextLoader.class)
 public class UserTest {
     private static final Logger logger = LogManager.getLogger(UserTest.class);
     private long id;
